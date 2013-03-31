@@ -12,6 +12,15 @@
         </blog>
     </controls>
 
+    <models>
+        <blog>
+            <posts>
+                <class>supa_modules_blog_models_posts</class>
+                <tap>eav</tap>
+            </posts>
+        </blog>
+    </models>
+
     <views>
         <blog>
             <list>

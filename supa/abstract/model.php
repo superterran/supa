@@ -2,15 +2,12 @@
 
 abstract class supa_model extends supa_object {
 
-//    public function getData()
-//    {
-//        return $this->_data;
-//    }
-//
-//    public function addData($data)
-//    {
-//        return $this->_data[] = $data;
-//    }
+    protected $data = array();
 
+    abstract public function getCollection();
+
+    abstract public function getData();
+
+    abstract public function addData($data);
 
 }

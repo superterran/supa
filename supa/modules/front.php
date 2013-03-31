@@ -11,7 +11,7 @@ class supa_front extends supa_object {
         $ctrlaction = $this->getLayoutHandle();
 
         $classname = $controls[$ctrlaction[0]][$ctrlaction[1]];
-        require_once(str_replace(_, DS, $classname).'.php'); // get controller path from classname
+        require_once(str_replace(_, DS, $classname).PHP); // get controller path from classname
         $controller = new $classname(); // instantiate controller
 
         if(isset($ctrlaction[2])) // deterimine what action to use

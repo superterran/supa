@@ -21,7 +21,7 @@ abstract class supa_object {
 
         $path = false; if(isset($params[0])) $path = $params[0];
         $value = false; if(isset($params[1])) $value = $params[1];
-//
+
 //        var_dump($methodPrefix, $spineKey, $path, $value); echo '<br><br>';
 
         switch($methodPrefix)
@@ -36,6 +36,22 @@ abstract class supa_object {
             case "view": // Show a view object
                 return $this->getModule('layout')->getView($path);
             break;
+
+            case "html": // Show a view object
+                return $this->getModule('layout')->getChildHtml($path);
+            break;
+
+            case "model": // provide a model singleton
+           //     var_dump($path); die();
+                $model = $this->getModels($path);
+
+                if(!isset($model['object'])) {
+                    $class = $this->instantiate($model['class']);
+                    $model['object'] =& $class;
+                }
+                return $model['object'];
+            break;
+
 
             /**
              * Global Getters and Setters,
@@ -54,44 +70,6 @@ abstract class supa_object {
             case "get":
                 if(isset($mainObj[$spineKey])) return $this->getPath($mainObj[$spineKey], $path); else return false;
             break;
-
-            /**
-             *
-             * this is nost of the original 'get' case. Seriously got this down to 1 line of code.
-             *
-             *
-
-                    var_dump($_cfg, $methodPrefix, $spineKey, $path, $value); echo '<br><br>'; die();
-                         $_cfg = $this->getConfig();
-
-                        foreach($this->convertToArray($params[0]) as $part) {
-                            if(isset($_cfg[$part])) $_cfg = $_cfg[$part];
-                        }
-                        if($_cfg == $this->getConfig()) return false;
-
-
-                        return $_cfg;
-                }
-                //var_dump($obj, $action);
-                if(isset($mainObj[$spineKey])) {
-                    if($spineKey) $_mainObj =& $mainObj[$spineKey];
-                    if(!$params) return $_mainObj;
-                    elseif(isset($_mainObj[$params[0]])) {
-                        if(is_string($_mainObj[$params[0]])) {
-                            return $_mainObj[$params[0]];
-                        } else {
-                            return $_mainObj[$params[0]];
-                        }
-                    } else {
-                        $_cfg = $this->getConfig();
-                        foreach($this->convertToArray($params[0]) as $part) {
-                            if(isset($_cfg[$part])) $_cfg = $_cfg[$part];
-                        }
-                        if($_cfg == $this->getConfig()) return false;
-                        return $_cfg;
-                    }
-                }
-             */
 
             case "set":
 
@@ -167,8 +145,8 @@ abstract class supa_object {
     protected function instantiate($classname, $params = false)
     {
         require_once($this->getClassFilepath($classname));
-        $_obj = new $classname($params);
-        return $_obj;
+        return new $classname($params);
+
     }
 
     /**

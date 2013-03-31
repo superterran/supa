@@ -64,7 +64,6 @@ class supa_mediator extends supa_object {
      */
     public function loadConfig()
     {
-
         $this->setConfig((array) json_decode(json_encode(simplexml_load_file(__DIR__.DS.self::CONFIG_PATH)), true));
         return $this;
     }
