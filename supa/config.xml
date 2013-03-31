@@ -1,0 +1,14 @@
+<supa>
+    <appname>Superterran's Handy Mailer Module</appname>
+    <theme>default</theme>
+
+    <control_default>example_index_index</control_default>
+
+    <mysql>
+        <host>localhost</host>
+        <user>root</user>
+        <pass/>
+        <port>3306</port>
+        <database>supa</database>
+    </mysql>
+</supa>

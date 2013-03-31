@@ -1,0 +1,167 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100);
+body {
+
+    background-color: lightslategray;
+    /*background-color: darkslategray;*/
+    color: lavender;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: 0;
+}
+
+
+a {
+    color: lemonchiffon;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#header {
+
+    width: 100%;
+    /*border: 2px solid yellow;*/
+    margin: 10px 10px 0 10px;
+
+}
+
+#header .logo {
+    font-size: 48px;
+    color: lavender;
+    float: left;
+    width: 250px;
+    text-align: center;
+    font-weight: 200;
+
+}
+
+.heading {
+    font-size: 32px;
+    color: lavender;
+    font-weight: 200;
+}
+
+.container {
+    display: block;
+    /*border: 1px solid green;*/
+    margin: 0 auto;
+    max-width: 945px;
+    width: 945px;
+    overflow: auto;
+}
+
+#content {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    /*border: 1px solid white;*/
+    min-height: 800px;
+    float: right;
+    margin: 10px;
+
+
+}
+
+#right {
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    border: 1px none black;
+    float: right;
+    margin: 10px;
+}
+
+#right ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#right ul li {
+    padding-left: 0;
+    list-style: none;
+}
+
+#right label {
+    font-weight: 100;
+    color: white;
+}
+
+#right #supa-avatar {
+
+    max-width: 100%;
+}
+
+
+#right .avatar-wrapper {
+
+    display: block;
+    position: relative;
+    background-color: beige;
+
+}
+
+#right .avatar-info {
+
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0,0,0,.7);
+    font-size: 30px;
+    font-weight: 100;
+    border-top: 1px solid black;
+
+}
+
+#right h1 {
+
+    font-weight: 300;
+    margin: 0px;
+}
+
+#footer {
+    clear: both;
+    width: 100%;
+    max-width: 920px;
+    border-bottom: 1px solid lavender;
+    margin: 10px;
+    text-align: center;
+    overflow-y: visible;
+    height: 12px;
+    margin-bottom: 30px;
+}
+
+#footer .text {
+    background-color: lightslategray;
+    display: inline-block;
+    padding: 0 10px 0 10px;
+}
+
+.post {
+    /*background-color: #fff;*/
+
+}
+.post .header {
+    font-size: 25px;
+    display: block;
+    /*background-color: cadetblue;*/
+
+}
+.post .content {
+
+    /*color: darkslategray;*/
+
+}
+
+#supa-debug {
+
+    display: none;
+    padding: 10px;
+    background-color: white;
+    color:  black;
+
+}
