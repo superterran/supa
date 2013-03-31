@@ -7,40 +7,52 @@ class supa_front extends supa_object {
      */
     public function control()
     {
-        // grab data from URL
-        if(isset($_SERVER['REDIRECT_URL'])) {
-            $action = explode(DS, substr($_SERVER['REDIRECT_URL'], 1));
-        } else {
-            $action = explode(_, $this->getConfig('control_default'));
-        }
-
         $controls = $this->getControls();
+        $ctrlaction = $this->getLayoutHandle();
 
-        /*
-         * Figures out what controller action we want from URL array
-         */
-        if(isset($controls[$action[0]][$action[1]])) {
-            $classname = $controls[$action[0]][$action[1]];
-        } elseif($controls[$action[0]]) {
-            $classname = $controls[$action[0]];
-        } else {
-            $classname = $this->getConfig('default_controlaction');
-        }
-
+        $classname = $controls[$ctrlaction[0]][$ctrlaction[1]];
         require_once(str_replace(_, DS, $classname).'.php'); // get controller path from classname
         $controller = new $classname(); // instantiate controller
 
-        /*
-         * deterimine what action to use
-         */
-        if(isset($action[2])) {
-            $actionMethod = $action[2].'Action';
+        if(isset($ctrlaction[2])) // deterimine what action to use
+        {
+            $actionMethod = $ctrlaction[2].'Action';
         }else {
             $actionMethod = 'indexAction';
         }
 
         $controller->$actionMethod(); // fire method
         return $this;
+
     }
 
+    public function getLayoutHandle($handle = 'fromUrl')
+    {
+        $_default = explode(_, $this->getConfig('controls/default/index'));
+
+        if($handle == 'fromUrl') {
+            if(isset($_SERVER['REDIRECT_URL'])) {
+                $_handle = explode(DS, substr($_SERVER['REDIRECT_URL'], 1));
+            } else {
+                $_handle = $_default;
+            }
+        }
+
+        foreach($_default as $key=>$val)
+        {
+            if((!isset($_handle[$key])) ||( $_handle[$key] == "")) $_handle[$key] = $val;
+        }
+
+        /**
+         * Determines if what generated is valid, if not, use layout handle for error
+         */
+        $controls = $this->getControls();
+        if(!isset($controls[$_handle[0]][$_handle[1]])) // detects if a valid ctrlaction
+        {
+            $_handle = explode(_, $this->getConfig('controls/default/error'));
+            $this->setConfig('responseCode', 404);
+        }
+
+        return $_handle;
+    }
 }

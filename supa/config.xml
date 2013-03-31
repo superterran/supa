@@ -1,8 +1,14 @@
 <supa>
     <appname>Superterran's Handy Mailer Module</appname>
     <theme>default</theme>
+    <responseCode>200</responseCode>
 
-    <control_default>example_index_index</control_default>
+    <controls>
+        <default>
+            <index>example_index_index</index>
+            <error>example_index_error</error>
+        </default>
+    </controls>
 
     <mysql>
         <host>localhost</host>

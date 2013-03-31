@@ -159,7 +159,7 @@ a:hover {
 
 #supa-debug {
 
-    display: none;
+    /*display: none;*/
     padding: 10px;
     background-color: white;
     color:  black;
