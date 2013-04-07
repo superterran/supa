@@ -1,6 +1,7 @@
 <div class="post">
-    <div class="header">My Test Post</div>
+    <div class="header"><?php echo $this->getData('title'); ?></div>
+    <a href="mailto: <?php echo $this->getData('email'); ?>"><?php echo $this->getData('byline'); ?></a><br>
     <div class="content">
-        This is a test
+        <?php echo $this->getData('body'); ?>
     </div>
 </div>

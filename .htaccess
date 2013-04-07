@@ -1,3 +1,14 @@
-RewriteEngine on
+## This is my old htaccess, I have to abandon it because it's not handling superglobals well.
+## It's really too bad, I thought it was
+#
+#   RewriteEngine on
+#
+#   ErrorDocument 404 /index.php
 
-ErrorDocument 404 /index.php
+    RewriteEngine On
+    RewriteBase /
+
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]

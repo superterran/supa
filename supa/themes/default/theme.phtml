@@ -4,15 +4,28 @@
 <head>
     <title>superterran dot com</title>
     <link rel="stylesheet" type="text/css" href="<?php echo $this->getConfig('path/themeurl'); ?>style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getConfig('path/themeurl'); ?>panels.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js"></script>
+    <script type="text/javascript" src="<?php echo $this->getConfig('path/themeurl'); ?>js/supa.js"></script>
+
 </head>
-<body>
-
-
-
+<body><?php echo $this->html('panels'); ?>
 <div id="box" class="container">
     <div id="header"><span class="logo">supeterran</span></div>
 
     <div id="content">
+        <?php if($this->hasMessages()): ?>
+        <div id="messages">
+            <ul>
+            <?php foreach($this->grabMessages() as $type => $msg): ?>
+                    <li class = "<?php echo $type; ?>"><?php echo $msg; ?></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php endif; ?>
+
 
         <?php echo $this->html('content'); ?>
 
@@ -39,7 +52,17 @@
 
     <div id="footer"><div class="text">I hate all footer text</div></div>
 
+    <div id="panels_login">
+        <?php if(!$this->model('panels/users')->isLoggedIn()): ?>
+            <a href="<?php echo $this->getUrl('panels/users/'); ?>">Panel</a></div>
+        <?php else: ?>
+            <a href="<?php echo $this->getUrl('panels/users/logout'); ?>">Logout</a></div>
+        <?php endif; ?>
 </div>
 
+
+    <script type="text/javascript">
+        var supa = new supa();
+    </script>
 </body>
 </html>

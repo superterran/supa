@@ -2,6 +2,7 @@
 
 class supa_front extends supa_object {
 
+
     /**
      * Implements a Front Controller pattern to determine what output to render
      */
@@ -11,6 +12,7 @@ class supa_front extends supa_object {
         $ctrlaction = $this->getLayoutHandle();
 
         $classname = $controls[$ctrlaction[0]][$ctrlaction[1]];
+
         require_once(str_replace(_, DS, $classname).PHP); // get controller path from classname
         $controller = new $classname(); // instantiate controller
 
@@ -22,6 +24,7 @@ class supa_front extends supa_object {
         }
 
         $controller->$actionMethod(); // fire method
+
         return $this;
 
     }
@@ -46,7 +49,9 @@ class supa_front extends supa_object {
         /**
          * Determines if what generated is valid, if not, use layout handle for error
          */
+
         $controls = $this->getControls();
+
         if(!isset($controls[$_handle[0]][$_handle[1]])) // detects if a valid ctrlaction
         {
             $_handle = explode(_, $this->getConfig('controls/default/error'));

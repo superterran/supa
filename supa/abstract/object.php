@@ -33,6 +33,10 @@ abstract class supa_object {
              *
              * let's $this->getView('blog/item') return an instantiated class
              */
+            case "dispatch": // Show a view object
+                return $this->getModule('observe')->dispatch($path);
+            break;
+
             case "view": // Show a view object
                 return $this->getModule('layout')->getView($path);
             break;
@@ -56,7 +60,7 @@ abstract class supa_object {
             /**
              * Global Getters and Setters,
              * calling $this->getWhatever() anywhere inside any class extending
-             * off of this object will get data from the mediator class, where 'whatever'
+             * off of this object will get data from the mediator object, where 'whatever'
              * is part of the $_all spine. This provides the plumbing that makes the framework useful.
              *
              * $this->setWhatever('name', 'value'); will populate this data object.
@@ -96,6 +100,7 @@ abstract class supa_object {
                         }
 
                         $new = json_decode($front.'"'.$value.'"'.$back, 1);
+
                         $mainObj[$spineKey] = array_merge_recursive($mainObj[$spineKey], $new);
                     }
 
@@ -113,9 +118,16 @@ abstract class supa_object {
 
         }
 
+        // better error handling
+        if(strtolower(substr($methodName, -6)) == 'action') { // if a control action, we probably want a 404 page
+
+            return $this;
+
+        }
+
         echo 'method does not exist:'. $methodName.'<br>';
         var_dump(debug_backtrace());
-        die();
+    //    die();
     }
 
 
@@ -133,6 +145,8 @@ abstract class supa_object {
         if(is_array($path)):
             foreach($path as $part) if(isset($_obj[$part])) $_obj = $_obj[$part];
         endif;
+
+        if(empty($_obj)) return false;
         return $_obj;
     }
 
@@ -157,6 +171,31 @@ abstract class supa_object {
     protected function getClassFilepath($classname)
     {
         return $this->getConfig('path/basedir').str_replace(_, DS, $classname.PHP);
+    }
+
+    /**
+     * pass in a path 'example/index/index', get a url.
+     * @param $path
+     * @return string
+     */
+    public function getUrl($path)
+    {
+        $path = explode(DS, $path);
+
+        $url = $this->getConfig('path/baseurl');
+        if(array($path)) {
+
+            foreach($path as $part)
+
+            $url = $url . $part . DS;
+
+        } else {
+
+            $url = $url . $path;
+
+        }
+
+        return $url;
     }
 
 }

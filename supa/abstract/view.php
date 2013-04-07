@@ -15,14 +15,29 @@ abstract class supa_view extends supa_object {
     {
         if(is_file($this->getPhtml())) {
 
-            // this appears to be the best way to do it
-            $output = "";
-            ob_start( );
-            include($this->getPhtml());
-            $output .= ob_get_clean();
+            $_data = $this->getData();
+      //      var_dump($_data);
+            if(!isset($_data['eid']) || !$_data['eid']) return $this->__output();// using view individually
 
+            $output = '';
+
+            foreach($this->getData() as $item) // iterating through collection
+            {
+                 $output .= $this->setData($item)->__output();
+            }
             return $output;
+
+          //  return $this->__output(); // fallback
         }
+    }
+
+    public function __output()
+    {
+        $output = "";
+        ob_start( );
+        include($this->getPhtml());
+        $output .= ob_get_clean();
+        return $output;
     }
 
     public function getPhtml($classname = null)
@@ -59,9 +74,52 @@ abstract class supa_view extends supa_object {
         $_layout = $this->getPath($_layouts, $part);
 
         $output = '';
-        foreach($_layout as $item) $output = $output.$item->toHtml();
-        return $output;
 
+        if(is_array($_layout)) {
+            foreach($_layout as $item) {
+                if(is_object($item)) $output = $output.$item->toHtml();
+            }
+        }  elseif(is_string($_layout)) { // because, presumably, some pages just want to dump text to layout
+            $output = $_layout;
+        }
+
+        return $output;
+    }
+
+    public function hasChildHtml($part)
+    {
+
+        $_layouts = $this->getLayout();
+        $_layout = $this->getPath($_layouts, $part);
+
+        $count = 0;
+
+        if(is_array($_layout)) {
+            foreach($_layout as $item) {
+                if(is_object($item)) $count++;
+            }
+        }  elseif(is_string($_layout)) { // because, presumably, some pages just want to dump text to layout
+            $count = 1;
+        }
+
+        var_dump(count($_layout), $count); die();
+
+        return $count;
 
     }
+
+
+    public function hasMessages()
+    {
+        if(!is_array($this->getSession('messages'))) return false; else return count($this->getSession('messages'));
+    }
+
+    public function grabMessages()
+    {
+        $_msg = $this->getSession('messages');
+        $this->setSession('messages', 'empty');
+        if(is_array($_msg)) return $_msg; else return false;
+
+    }
+
 }

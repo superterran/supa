@@ -37,6 +37,27 @@ a:hover {
 
 }
 
+h1 {
+
+    font-size: 32px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+h2 {
+
+    font-size: 29px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+h3 {
+
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
 .heading {
     font-size: 32px;
     color: lavender;
@@ -163,5 +184,76 @@ a:hover {
     padding: 10px;
     background-color: white;
     color:  black;
+
+}
+
+.row {
+
+    padding: 3px;
+}
+
+.row label {
+    width: 200px;
+    display: block;
+    float: left;
+    text-align: right;
+    padding: 4px;
+    padding-right: 10px;
+}
+
+.row input {
+
+    border: 1px solid lavender;
+    padding: 4px;
+    background-color: rgba(255,255,255,.1);
+    color: ivory;
+
+}
+
+.row button {
+
+    border: none;
+    padding: 4px;
+    background-color: transparent;
+    color: ivory;
+    font-size: 24px;
+
+}
+
+
+.row button:hover {
+
+    /*text-decoration: underline;*/
+    color: lightcyan;
+
+}
+
+#messages {
+
+    display: block;
+    clear: all;
+
+}
+
+#messages ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+#messages li {
+    padding: 5px;
+    list-style: none;
+}
+
+#messages .error {
+    color: lightpink;
+    background-color: rgba(255, 0, 0, .1);
+    border: 1px solid rgba(255, 0, 0, .4);
+}
+
+#messages .success {
+    color: lime;
+    background-color: rgba(0, 255, 0, .1);
+    border: 1px solid rgba(0, 255, 0, .4);
 
 }

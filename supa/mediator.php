@@ -14,9 +14,7 @@ class supa_mediator extends supa_object {
     static $_all = array();
 
     //load these first
-    protected $_order = array(
-        'modules'
-    );
+    protected $_order = array();
 
     const CLASS_PREFIX = 'supa';
     const CONFIG_PATH = 'config.xml';
@@ -26,13 +24,16 @@ class supa_mediator extends supa_object {
     public function __construct()
     {
 
-
         $this->loadConfig()
             ->setConfig('path/basedir', realpath(__DIR__.DS.'..').DS)
             ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
             ->setConfig('path/appdir', $this->getConfig('path/basedir').self::CLASS_PREFIX.DS)
             ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
-            ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS);
+            ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS)
+            ->setConfig('path/modulesdir', $this->getConfig('path/appdir').'modules'.DS);
+
+        $this->_order[] = $this->getConfig('path/modulesdir').'session.php';
+        $this->_order[] = $this->getConfig('path/modulesdir').'modules.php';
 
         $this->loadModules();
     }
@@ -49,13 +50,19 @@ class supa_mediator extends supa_object {
 
         $loadpath = __DIR__.DS.'modules'.DS;
 
-        foreach(glob($loadpath.'*'.PHP) as $module)
-        {
-            require_once($module);
+        $_sorted = array_merge_recursive($this->_order, glob($loadpath.'*'.PHP));
 
-            $classname = str_replace(PHP, '', self::CLASS_PREFIX._.basename($module)); // supa_modules, for example
-            $name = str_replace(PHP, '', basename($module)); // modules, for example
-            if(class_exists($classname)) $this->setModule($name, new $classname());
+        foreach($_sorted as $module)
+        {
+        //    var_dump($module);
+
+            if(require_once($module)) {
+
+                $classname = str_replace(PHP, '', self::CLASS_PREFIX._.basename($module)); // supa_modules, for example
+                $name = str_replace(PHP, '', basename($module)); // modules, for example
+                if(class_exists($classname) && !is_object($this->getModule($name))) $this->setModule($name, new $classname());
+            }
+
         }
     }
 

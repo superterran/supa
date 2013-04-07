@@ -1,0 +1,11 @@
+<h1>Create an Account</h1>
+<p></p>
+
+<form action="<?php echo $this->getUrl('panels/users/new'); ?>" method="post">
+
+    <div class="row"><label>Email</label><input type="email" name="email"></div>
+    <div class="row"><label>Password</label><input type="password" name="password"></div>
+    <div class="row"><label>Confirm Password</label><input type="password" name="password_confirm"></div>
+    <div class="row"><label><button type="submit">Register</button></label></div>
+
+</form>

@@ -5,9 +5,12 @@ ini_set('display_errors', true);
 
 require_once('supa/mediator.php');
 $site = new supa_mediator();
+$site->getModule('do')->action();
 $site->getModule('front')->control();
-$site->getModule('layout')->render();
+$site->getModule('response')->render();
 ?>
+
+<?php if($site->model('panels/users')->isLoggedIn()): ?>
 <div id="supa-debug">
     <pre>
         <h1>Supa</h1>
@@ -22,3 +25,4 @@ $site->getModule('layout')->render();
 
     </pre>
 </div>
+<?php endif; ?>

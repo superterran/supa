@@ -1,0 +1,44 @@
+<module>
+
+    <meta>
+        <name>Panels</name>
+        <description>The views and stuff for the global 'panel' admin system</description>
+        <active>true</active>
+    </meta>
+
+    <controls>
+        <panels>
+            <users>supa_modules_panels_controls_users</users>
+        </panels>
+    </controls>
+
+    <models>
+        <panels>
+            <users>
+                <class>supa_modules_panels_models_users</class>
+                <tap>eav</tap>
+            </users>
+        </panels>
+    </models>
+
+    <views>
+        <panels>
+            <main>
+                <class>supa_modules_panels_views_main</class>
+                <phtml>main.phtml</phtml>
+            </main>
+
+            <login>
+                <class>supa_modules_panels_views_login</class>
+                <phtml>login.phtml</phtml>
+            </login>
+
+            <add>
+                <class>supa_modules_panels_views_add</class>
+                <phtml>add.phtml</phtml>
+            </add>
+
+        </panels>
+    </views>
+
+</module>
