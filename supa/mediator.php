@@ -1,9 +1,5 @@
 <?php
 
-define('DS', DIRECTORY_SEPARATOR);
-define('_', '_');
-define('PHP', '.php');
-
 /**
  * Mediator provides a common base so all the parts can work together.
  * It's like a really shitty kernel

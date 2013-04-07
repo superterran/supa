@@ -3,6 +3,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
+define('DS', DIRECTORY_SEPARATOR);
+define('_', '_');
+define('PHP', '.php');
+
+
 require_once('supa/mediator.php');
 $site = new supa_mediator();
 $site->getModule('do')->action();
