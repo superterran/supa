@@ -6,6 +6,7 @@ ini_set('display_errors', true);
 define('DS', DIRECTORY_SEPARATOR);
 define('_', '_');
 define('PHP', '.php');
+define('__DIR__', dirname(__FILE__));
 
 
 require_once('supa/mediator.php');
