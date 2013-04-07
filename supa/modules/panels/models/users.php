@@ -37,7 +37,7 @@ class supa_modules_panels_models_users extends supa_model_eav {
         if(!$email || !$password) {
             $this->setSession('messages', array('error'=>'Please supply credentials.'));
             $this->setSession('user','false');
-            $this->setResponse('redirect',$this->getUrl('panels/url'));
+            $this->setResponse('redirect', 'panels/users');
             return false;
         }
 
@@ -49,10 +49,6 @@ class supa_modules_panels_models_users extends supa_model_eav {
             ->getCollection('first');
 
         if($user) {
-
-//            var_dump($email);
-//            var_dump($user);
-//            die();
 
             unset($user['password']);
             $this->setSession('user', $user);

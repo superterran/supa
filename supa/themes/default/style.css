@@ -19,22 +19,61 @@ a:hover {
     text-decoration: underline;
 }
 
-#header {
+
+#header  {
+    font-size: 48px;
+    color: lavender;
 
     width: 100%;
-    /*border: 2px solid yellow;*/
-    margin: 10px 10px 0 10px;
+    text-align: center;
+    font-weight: 200;
+    display: block;
+    clear: both;
+    padding-left: 0px;
+
+    height: 70px;    margin-left: -30px;
+}
+
+.logo {
+    display: block;
+    font-size: 48px;
+}
+
+#navigation ul {
+
+    display: block;
+    border: 1px solid green;
+    float: left;
+    clear: both;
+    padding: 0px;
+
+
 
 }
 
-#header .logo {
-    font-size: 48px;
-    color: lavender;
+#navigation li {
+    /*border: 1px solid green;*/
     float: left;
-    width: 250px;
-    text-align: center;
-    font-weight: 200;
+    list-style: none;
 
+    font-size: 24px;
+    height: 50px;
+    position: relative;
+
+    clear: right;
+    padding-right: 20px;
+}
+
+#navigation li a {
+    bottom: 0px;
+    display: inline;
+    bottom: 0px;
+    padding-top: 22px;
+    float: left;
+}
+
+#navigation li:first-child a {
+    padding-top: 0px;
 }
 
 h1 {
@@ -60,7 +99,7 @@ h3 {
 
 .heading {
     font-size: 32px;
-    color: lavender;
+    color: cadetblue;
     font-weight: 200;
 }
 
@@ -68,8 +107,8 @@ h3 {
     display: block;
     /*border: 1px solid green;*/
     margin: 0 auto;
-    max-width: 945px;
-    width: 945px;
+    max-width: 960px;
+    width: 960px;
     overflow: auto;
 }
 
@@ -78,19 +117,24 @@ h3 {
     width: 100%;
     max-width: 650px;
     /*border: 1px solid white;*/
-    min-height: 800px;
-    float: right;
+    min-height: 700px;
+    float: left;
     margin: 10px;
-
-
+    text-align: justify;
+    background-color: white;
+    padding: 15px;
+    margin-right: 0px;
+    color: #333;
 }
+
+
 
 #right {
     display: block;
     width: 100%;
     max-width: 250px;
     border: 1px none black;
-    float: right;
+    float: left;
     margin: 10px;
 }
 
@@ -176,6 +220,7 @@ h3 {
 
     /*color: darkslategray;*/
 
+
 }
 
 #supa-debug {
@@ -193,7 +238,7 @@ h3 {
 }
 
 .row label {
-    width: 200px;
+    width: 260px;
     display: block;
     float: left;
     text-align: right;
@@ -210,21 +255,22 @@ h3 {
 
 }
 
-.row button {
+.row button, .row a {
 
     border: none;
     padding: 4px;
     background-color: transparent;
-    color: ivory;
+    color: cadetblue;
     font-size: 24px;
+    margin: 10px;
 
 }
 
 
-.row button:hover {
+.row button:hover, .row a:hover {
 
     /*text-decoration: underline;*/
-    color: lightcyan;
+    color: lightblue;
 
 }
 
@@ -233,16 +279,18 @@ h3 {
     display: block;
     clear: all;
 
+
 }
 
 #messages ul {
     padding: 0px;
     margin: 0px;
+
 }
 
 #messages li {
-    padding: 5px;
     list-style: none;
+    padding: 10px;
 }
 
 #messages .error {
@@ -256,4 +304,10 @@ h3 {
     background-color: rgba(0, 255, 0, .1);
     border: 1px solid rgba(0, 255, 0, .4);
 
+}
+
+#most { background-color: rgba(255,255,255, .2); color: lavender }
+
+.center {
+    text-align: center;
 }

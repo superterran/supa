@@ -30,7 +30,7 @@ class supa_modules_panels_controls_users extends supa_control {
             $this->setRequest('messages', $errors);
         }
 
-        $this->tryAction();
+        $this->loginAction();
 
     }
 

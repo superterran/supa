@@ -14,7 +14,7 @@ supa = Class.create({
 //        var pile = this.doAction('lastChange', {'part':'pile'});
 //        this.pile_lastChange = pile;
 
-//        this.stateObserver();
+        this.MessagesObserver();
 
     },
 
@@ -108,13 +108,12 @@ supa = Class.create({
 
     },
 
-//    stateObserver: function () {
-//
-//        $$('.pileStateSelect').each(function (e) {
-//            e.observe('change', function (event) {
-//                this.doAction('changeState', {'id': e.name.replace('state_', ''), 'newstate': e.value}, e);
-//            }.bind(this))
-//        }.bind(this));
-//    }
+    MessagesObserver: function () {
+
+        $$('#messages li').each(function (e) {
+            Effect.BlindUp.delay(5, 'messages', { duration: 1.0 });
+//            e.dropOut({ duration: 6.0}).delay(5);
+        }.bind(this));
+    }
 
 });
