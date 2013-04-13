@@ -113,7 +113,7 @@ abstract class supa_model_eav extends supa_model
         }
 
         $list = array(
-            '{{eav_table}}'=>$this->getConfig('mysql')['prefix']._.$this->getConfig('mysql')['eav_table'],
+            '{{eav_table}}'=>$this->getConfig('mysql/prefix')._.$this->getConfig('mysql/eav_table'),
             '{{eav_entity}}'=>get_class($this),
             '{{limit}}'=> '100'
         );

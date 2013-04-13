@@ -24,7 +24,7 @@ class supa_response extends supa_object {
     {
 
         $this->attemptRedirect(); // because we want to attempt to do things
-        http_response_code($this->getConfig('responseCode'));
+        # http_response_code($this->getConfig('responseCode')); // broken on hostgator
 
         echo $this->getModule('layout')->render();
 

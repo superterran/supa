@@ -21,7 +21,7 @@ class supa_mediator extends supa_object {
     {
 
         $this->loadConfig()
-            ->setConfig('path/basedir', realpath(__DIR__.DS.'..').DS)
+            ->setConfig('path/basedir', realpath(__DIR__.DS.'..'.DS).DS)
             ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
             ->setConfig('path/appdir', $this->getConfig('path/basedir').self::CLASS_PREFIX.DS)
             ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
@@ -47,10 +47,9 @@ class supa_mediator extends supa_object {
         $loadpath = __DIR__.DS.'modules'.DS;
 
         $_sorted = array_merge_recursive($this->_order, glob($loadpath.'*'.PHP));
-
-        foreach($_sorted as $module)
+	foreach($_sorted as $module)
         {
-        //    var_dump($module);
+            
 
             if(require_once($module)) {
 

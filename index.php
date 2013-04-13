@@ -6,9 +6,8 @@ ini_set('display_errors', true);
 define('DS', DIRECTORY_SEPARATOR);
 define('_', '_');
 define('PHP', '.php');
-define('__DIR__', dirname(__FILE__));
 
-
+date_default_timezone_set('America/New_York');
 require_once('supa/mediator.php');
 $site = new supa_mediator();
 $site->getModule('do')->action();

@@ -17,7 +17,7 @@ abstract class supa_object {
 
         $mainObj =&supa_mediator::$_all; // This works, but it needs to be more modular. Set in config sorta thing
         $methodPrefix = substr($methodName, 0, strlen(preg_replace("/^([a-z]*)[A-Z].*$/", "$1", $methodName))); // the 'get'Module part of getModule();
-        $spineKey = '_'.lcfirst(substr($methodName, strlen(preg_replace("/^([a-z]*)[A-Z].*$/", "$1", $methodName)))); // the key of the $mainObj we're trying to access
+        $spineKey = '_'.strtolower(substr($methodName, strlen(preg_replace("/^([a-z]*)[A-Z].*$/", "$1", $methodName)))); // the key of the $mainObj we're trying to access
 
         $path = false; if(isset($params[0])) $path = $params[0];
         $value = false; if(isset($params[1])) $value = $params[1];
