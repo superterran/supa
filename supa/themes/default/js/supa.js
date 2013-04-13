@@ -18,20 +18,25 @@ supa = Class.create({
 
     },
 
-    doModal: function(action, params, doto) {
+    doAction: function(todo, params, doto) {
 
-        console.log(action, params);
+        console.log(todo, params);
 
         doto.removeClassName('success');
         doto.removeClassName('error');
         doto.removeClassName('problem');
 
-        var url = '?do=' + action;
+        var url = '/';
+
+
+        var payload = { 'do' : todo, 'params' : JSON.stringify(params) }
+
+        console.log(payload);
 
         new Ajax.Request(url, {
-            method: 'get',
+            method: 'post',
             asynchronous:false,
-            parameters: params,
+            parameters: payload,
             onComplete: function (response) {
 
                 if (400 === response.status) {
@@ -40,9 +45,7 @@ supa = Class.create({
                 }
 
                 if (200 === response.status) {
-                    doto.fade();
-                    this.reload('list', 'list_container').bind(this);
-                    this.reload('sites', 'sites_container').bind(this);
+                    doto.innerHTML = response.responseText;
                     return;
                 }
 
@@ -50,61 +53,7 @@ supa = Class.create({
             }.bind(this)
         });
 
-    },
 
-    doAction: function (action, params, doto) {
-
-        if(doto) {
-            doto.removeClassName('success');
-            doto.removeClassName('error');
-            doto.removeClassName('problem');
-        }
-
-        var url = '?do=' + action;
-
-        var responseText;
-
-        new Ajax.Request(url, {
-            method: 'get',
-            asynchronous:false,
-            parameters: params,
-            onComplete: function (response) {
-                if (400 === response.status) {
-                    if(doto) {
-                        doto.addClassName('error');
-                    } else {
-                        doto = false;
-                    }
-                    return;
-                }
-
-                if (200 === response.status) {
-                    if(doto) {
-                        doto.addClassName('success');
-                    } else {
-                        responseText = (response.responseText);
-                    }
-                    return;
-                }
-
-                if(doto) doto.addClassName('problem');
-            }
-        });
-
-        return responseText;
-    },
-
-    reload: function(phtml, container) {
-
-        var url = '?phtml='+phtml;
-
-        new Ajax.Request(url, {
-            method: 'get',
-            onComplete: function (response) {
-                $(container).update(response.responseText);
-                this.stateObserver(); //@todo needs to be moved
-            }.bind(this)
-        });
 
     },
 

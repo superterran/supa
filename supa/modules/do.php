@@ -22,21 +22,56 @@
  */
 class supa_do extends supa_object {
 
+    const DO_REQUEST_SUCCESS = 200;
+    const DO_REQUEST_FAIL = 200;
+
     public function __construct()
     {
+
         $do = array_merge_recursive($_GET, $_POST);
+        if(isset($do['params']) && json_decode($do['params'])) {
+            foreach(json_decode($do['params']) as $key => $val) $do[$key] = $val;
+        }
+        unset($do['params']);
         $this->setDo($do);
+
     }
 
     public function action()
     {
-//        if($this->getDo('action'))
-//        {
-//
-//
-//
-//
-//        }
+
+        $do = $this->getDo();
+
+//        var_dump( $_SERVER );
+
+        if($this->getDo('action') && $_SERVER['REQUEST_URI'] == DS)
+        {
+            $result = false;
+
+            if(isset($do['perform']))
+            {
+                $perform = $do['perform'];
+                $result = $this->$perform[0]($perform[1])->$perform[2]($perform[3]);  //perform action!
+            }
+
+            if(isset($do['do'])) {
+                $view = $do['do'];
+                $result = $this->view($view)->toHtml(); // , $this->getDo('view')
+            }
+
+            $this->getModule('session')->saveSession();
+
+            if($result) {
+                http_response_code(self::DO_REQUEST_SUCCESS);
+                echo $result;
+                exit;
+            } else {
+                http_response_code(self::DO_REQUEST_FAIL);
+                exit;
+            }
+
+
+        }
     }
 
 }

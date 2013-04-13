@@ -1,16 +1,36 @@
 #panel {
 
-    border: 1px solid green;
-    background: #45484d; /* Old browsers */
-    background: -moz-linear-gradient(top, #45484d 0%, #000000 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #45484d 0%,#000000 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #45484d 0%,#000000 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #45484d 0%,#000000 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+    background-color: rgba(0,0,0,.8);
+    color: aliceblue;
+    display: block;
+    overflow: auto;
+    padding: 10px;
+    font-size: 20px;
+
+    /*position: fixed;*/
+  position: relatve;
+    top: 0px;
+    left:0px;
+    right:0px;
+    z-index: 9000;
+    max-height: 80%;
+}
+
+#panel #panel_menu {
+
+    float: right;
+    margin: 0px;
 
 }
+
+#panel #panel_menu li {
+
+    list-style: none;
+    float: left;
+    padding-right: 20px;
+
+}
+
 
 #panels_login {
 
@@ -40,3 +60,48 @@
     color: dimgray;
 
 }
+
+#panel div.tree {
+    float: left;
+    width: 200px;
+    /*border: 1px solid white;*/
+
+}
+
+#panel ul.tree {
+
+    margin: 0px;
+    padding: 0px;
+
+
+}
+
+#panel .tree li {
+
+    font-size: 16px;
+    /*border: 1px solid green;*/
+    list-style: none;
+    margin: 0px;
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#panel div.panelcontent {
+
+    width: 750px;
+    float: right;
+    overflow-y: auto;
+    max-height: 500px;
+
+}
+
+#panel div.panelcontent table {
+    width: 100%;
+    font-weight: 200;
+}
+
+#panel div.panelcontent th  {
+    text-align: left;
+}
+

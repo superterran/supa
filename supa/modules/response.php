@@ -10,7 +10,7 @@ class supa_response extends supa_object {
     protected function attemptRedirect()
     {
         $redirect = $this->getResponse('redirect');
-       // var_dump($this->getUrl($redirect)); die();
+
         if($redirect) {
             $this->getModule('session')->saveSession();
             header('location: '. $this->getUrl($redirect));

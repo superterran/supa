@@ -63,6 +63,7 @@ abstract class supa_view extends supa_object {
         $_views = $this->getViews();
         $view = $this->getPath($_views, $part);
         if(!isset($view['object']) && isset($view['class'])) {
+            if(!isset($view['phtml'])) $view['phtml'] = false;
             $view['object'] = $this->instantiate($view['class'], $view['phtml']);
         }
         if(isset($view['class'])) return $view['object']; else return false;

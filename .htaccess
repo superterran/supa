@@ -5,7 +5,7 @@
 #
 #   ErrorDocument 404 /index.php
 # Use PHP 5.3
-AddType application/x-httpd-php53 .php
+#AddType application/x-httpd-php53 .php
 
     RewriteEngine On
     RewriteBase /

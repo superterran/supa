@@ -1,0 +1,24 @@
+<h2><?php echo $this->grabEntityLabel(); ?> Collection</h2>
+<ul>
+
+    <table>
+        <thead>
+            <tr>
+                <?php foreach($this->grabAttributes() as $attr): ?>
+                    <th><?php echo $attr['attribute'] ?></th>
+                <?php endforeach ?>
+                <td onclick="supa.doAction('panels/eav/add', {'entity':'<?php echo $this->getDo('entity') ?>'}, $('panelcontent'))">Add</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->grabCollection() as $item): ?>
+                <tr>
+                    <?php foreach($this->grabAttributes() as $attr): ?>
+                        <td><?php echo $item[$attr['attribute']] ?></td>
+                    <?php endforeach ?>
+                    <td><a href="#" onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $this->getDo('entity') ?>', 'perform': ['model','panels/eav','delete', '<?php echo $item['id'] ?>']}, $('panelcontent'))">Remove</a></td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
+</ul>

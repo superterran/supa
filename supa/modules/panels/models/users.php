@@ -13,7 +13,7 @@ class supa_modules_panels_models_users extends supa_model_eav {
     public function isLoggedIn($kick = false)
     {
 
-        if($this->getSession('user') && !$this->getSession('user\email')) {
+        if($this->getSession('user/email')) {
             return true;
         } else {
             if($kick == true) {
@@ -44,10 +44,10 @@ class supa_modules_panels_models_users extends supa_model_eav {
         $password = $this->hash($password);
 
         $user = $this->model('panels/users')
-            ->filter('email', '=', $email)
+//            ->filter('email', '=', $email)
             ->filter('password', '=', $password)
             ->getCollection('first');
-
+var_dump($user);
         if($user) {
 
             unset($user['password']);

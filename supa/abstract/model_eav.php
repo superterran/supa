@@ -11,13 +11,21 @@ abstract class supa_model_eav extends supa_model
 
     const SELECT = "select * from {{eav_table}} ";
     const WHERE = " where entity = '{{eav_entity}}' ";
+
     const LIMIT = "limit {{limit}}";
+
+    const DELETE = "delete from {{eav_table}} where eid = {{eid}}";
 
     protected $_select = false;
     protected $_where = false;
+    protected $_filter = false;
     protected $_limit = false;
+    protected $_meta = false; // this flag determines rather a query gets the attribute values or the attribute meta data
+
 
     protected $_sql = false;
+
+    protected $_entityname = false;
 
     protected $sql_hide_error = false;
 
@@ -30,10 +38,20 @@ abstract class supa_model_eav extends supa_model
 
     }
 
+
+    protected function getCollectionSelect()
+    {
+        $this->select();
+         $this->where();
+
+        return $this->_sql;
+
+    }
+
     public function getCollection($part = false)
     {
 
-        $col = $this->sql($this->_sql);
+        $col = $this->sql($this->getCollectionSelect());
 
         if($col) {
 
@@ -59,7 +77,7 @@ abstract class supa_model_eav extends supa_model
         $this->_eid = $eid;
         $_tmp = array();
         $entity = $this->sql($this->select() , $this->where()." and eid = ".$eid.";");
-        $_tmp['eid'] = $eid;
+        $_tmp['id'] = $eid;
         foreach($entity as $attr)
         {
 
@@ -68,6 +86,13 @@ abstract class supa_model_eav extends supa_model
 
         return $_tmp;
     }
+
+    public function delete($eid = null)
+    {
+        if($eid) $this->_eid = $eid;
+        return $this->sql(self::DELETE);
+    }
+
 
     public function setData()
     {
@@ -83,7 +108,7 @@ abstract class supa_model_eav extends supa_model
     {
 
         $eid = $this->eidGetNew();
-        foreach($data as $attr => $val) $this->addSingleAttribute($eid, $attr, $val);
+        foreach($data as $attribute => $value) $this->addSingleAttribute($eid, $attribute, $value, 'false');
         return $this->load($eid);
 
     }
@@ -98,9 +123,9 @@ abstract class supa_model_eav extends supa_model
 
     }
 
-    protected function addSingleAttribute($eid, $attribute, $value)
+    protected function addSingleAttribute($eid, $attribute, $value, $meta = 'false')
     {
-        return $this->sql("insert into {{eav_table}} (eid, entity, attribute, value) values('$eid', '{{eav_entity}}', '$attribute', '$value');");
+        return $this->sql("insert into {{eav_table}} (eid, entity, attribute, value, meta) values('$eid', '{{eav_entity}}', '$attribute', '$value', '".(string) $meta."');");
     }
 
     public function sql($sql)
@@ -114,13 +139,14 @@ abstract class supa_model_eav extends supa_model
 
         $list = array(
             '{{eav_table}}'=>$this->getConfig('mysql/prefix')._.$this->getConfig('mysql/eav_table'),
-            '{{eav_entity}}'=>get_class($this),
+            '{{eav_entity}}'=>$this->getEntity(),
+            '{{eid}}'=>$this->getEid(),
+            '{{meta}}'=>$this->isMeta(),
             '{{limit}}'=> '100'
         );
 
         foreach($list as $needle => $replace) $sql = str_replace($needle, $replace, $sql);
 
-     //   var_dump($sql);
         $result = mysql_query($sql, $this->_tap);
         if(!$result && !$this->sql_hide_error) echo ('<span style="color:red">error:</span> '.mysql_error().'<br>'.$sql);
 
@@ -144,22 +170,24 @@ abstract class supa_model_eav extends supa_model
 
         $this->sql("use ".$this->getConfig('mysql/database').";");
 
-       $this->sql("
-            CREATE TABLE if not exists `supa_eav` (
-              `id` int(11) NOT NULL AUTO_INCREMENT,
-              `eid` int(11) DEFAULT NULL,
-              `entity` varchar(45) DEFAULT NULL,
-              `attribute` varchar(45) DEFAULT NULL,
-              `value` longtext,
-              PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
+//       $this->sql("
+//            CREATE TABLE if not exists `supa_eav` (
+//              `id` int(11) NOT NULL AUTO_INCREMENT,
+//              `eid` int(11) DEFAULT NULL,
+//              `entity` varchar(45) DEFAULT NULL,
+//              `attribute` varchar(45) DEFAULT NULL,
+//              `value` longtext,
+//              PRIMARY KEY (`id`)
+//            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1");
     }
 
 
     public function filter($attr, $cond, $val)
     {
 
-        $this->_sql = $this->where() . " and attribute = '$attr' and value $cond  '$val' ";
+        $this->where();
+        $this->_filter .= " and attribute = '$attr' and value $cond  '$val' ";
+        $this->sql($this->_sql .= $this->_filter);
         return $this;
 
     }
@@ -167,7 +195,7 @@ abstract class supa_model_eav extends supa_model
     protected function select()
     {
         if(!$this->_select) $this->_select = self::SELECT;
-
+        $this->isMeta('false');
         $this->_sql = $this->_select;
         return $this->_sql;
     }
@@ -176,8 +204,8 @@ abstract class supa_model_eav extends supa_model
     {
         $this->select();
         if(!$this->_where) $this->_where = self::WHERE;
-      //  var_dump($this->_where); die('aa');
         $this->_sql = $this->_sql . $this->_where;
+        $this->_sql.=$this->_filter;
         return $this->_sql;
 
     }
@@ -189,6 +217,106 @@ abstract class supa_model_eav extends supa_model
         $this->_sql = $this->_sql . $this->_limit;
         return $this;
 
+    }
+
+    /**
+     * Returns list of EAV entities with labels from module xml
+     * @return array
+     */
+    public function getEntities()
+    {
+        $entities = $this->sql('select entity from {{eav_table}} group by entity desc');
+
+        $data = array();
+        foreach($entities as $entity)
+        {
+            $data[$entity['entity']] = $this->getEntityLabel($entity['entity']);
+        }
+
+        return $data;
+    }
+
+    public function getEntityLabel($entity = false)
+    {
+
+        if(!$entity) $entity = $this->getEntity();
+        $part = explode(_, $entity);
+        return $this->getModels($part[2].DS.$part[4].DS.'label');
+    }
+
+
+    protected function getEntity()
+    {
+        if(!$this->_entityname) {
+            $this->_entityname = get_class($this);
+        }
+        return $this->_entityname;
+    }
+
+    protected function setEntity($value)
+    {
+        $this->_entityname = $value;
+        return $this;
+    }
+
+    protected function getAttributes()
+    {
+        $sql = $this->where(). ' group by attribute';
+
+//        $this->isMeta('false');
+
+       $data = array();
+        foreach($this->sql($sql) as $attrib) {
+
+            if($attrib['meta'] == 'false') {
+                $set = $this->getMeta($attrib['attribute']);
+                $set['attribute'] = $attrib['attribute'];
+                $set['value'] = $attrib['value'];
+
+                $data[] = $set;
+            }
+        }
+
+        foreach($data as $index => $var) {
+            if(!isset($var['kind']) || $var['kind'] == false)
+            {
+                $data[$index]['kind'] = 'textfield';
+                $data[$index]['label'] = $var['attribute'];
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Grabs Meta data from eav table
+     * @param $attribute
+     * @return array
+     */
+    protected function getMeta($attribute)
+    {
+        $sql = $this->sql($this->where() . ' and meta = "'.$attribute.'" ');
+        $data = array();
+
+        if(!empty($sql)) {
+            foreach($sql as $var) {
+                if($var['meta'] != 'false') $data[$var['attribute']] = $var['value'];
+            }
+        }
+        return $data;
+    }
+
+
+    protected function getEid()
+    {
+        return $this->_eid;
+    }
+
+    protected function isMeta($toggle = null)
+    {
+        if(!is_null($toggle)) $this->_meta = (bool) $toggle;
+        if($this->_meta) return '!='; else return '=';
+        return (string) $this->_meta;
     }
 
 }

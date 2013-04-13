@@ -1,0 +1,12 @@
+<div class="tree">
+    <h1>Entities</h1>
+    <ul class = "tree">
+    <?php foreach($this->getEntities() as $entity => $label): ?>
+        <li onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $entity ?>'}, $('panelcontent'))">
+            <?php echo $label ?>
+        </li>
+    <?php endforeach ?>
+    </ul>
+</div>
+
+<div id="panelcontent" class="panelcontent"></div>

@@ -1,0 +1,10 @@
+<h2>New Item</h2>
+<form>
+
+<?php foreach($this->grabAttributes() as $attribute): ?>
+        <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'])->setData($attribute)->toHtml(); ?></div>
+ <?php endforeach; ?>
+
+    <button type="submit">Add</button>
+
+</form>

@@ -15,9 +15,20 @@
     <models>
         <panels>
             <users>
+                <label>Panel Users</label>
                 <class>supa_modules_panels_models_users</class>
                 <tap>eav</tap>
             </users>
+
+            <eav>
+                <class>supa_modules_panels_models_eav</class>
+                <tap>eav</tap>
+            </eav>
+
+            <kinds>
+                <class>supa_modules_panels_models_kinds</class>
+            </kinds>
+
         </panels>
     </models>
 
@@ -37,6 +48,44 @@
                 <class>supa_modules_panels_views_add</class>
                 <phtml>add.phtml</phtml>
             </add>
+
+            <eav>
+                <entities>
+                    <class>supa_modules_panels_views_eav_entities</class>
+                    <phtml>eav/entities.phtml</phtml>
+                </entities>
+
+                <collection>
+                    <class>supa_modules_panels_views_eav_collection</class>
+                    <phtml>eav/collection.phtml</phtml>
+                </collection>
+
+                <add>
+                    <class>supa_modules_panels_views_eav_add</class>
+                    <phtml>eav/add.phtml</phtml>
+                </add>
+
+            </eav>
+
+
+            <kinds>
+                <richtext>
+                    <label>Rich Text Field</label>
+                    <class>supa_modules_panels_views_kinds_richtext</class>
+                </richtext>
+
+                <textfield>
+                    <label>Text Field</label>
+                    <class>supa_modules_panels_views_kinds_textfield</class>
+                </textfield>
+
+                <password>
+                    <label>Password</label>
+                    <class>supa_modules_panels_views_kinds_password</class>
+                </password>
+
+
+            </kinds>
 
         </panels>
     </views>

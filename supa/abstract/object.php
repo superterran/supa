@@ -45,6 +45,10 @@ abstract class supa_object {
                 return $this->getModule('layout')->getChildHtml($path);
             break;
 
+            case "class": // Returns the appropriate thing based on classname
+                return $this->fetchFromClassname($path);
+            break;
+
             case "model": // provide a model singleton
            //     var_dump($path); die();
                 $model = $this->getModels($path);
@@ -146,7 +150,12 @@ abstract class supa_object {
             foreach($path as $part) if(isset($_obj[$part])) $_obj = $_obj[$part];
         endif;
 
+        // sanitization
+
         if(empty($_obj)) return false;
+        if(is_string($_obj) && $_obj === 'false') return (bool) false; // thank god
+        if(is_string($_obj) && $_obj === 'true') return (bool) true; // thank god
+        
         return $_obj;
     }
 
@@ -180,6 +189,9 @@ abstract class supa_object {
      */
     public function getUrl($path)
     {
+
+        if(!is_string($path)) return $this->getConfig('path/baseurl');
+
         $path = explode(DS, $path);
 
         $url = $this->getConfig('path/baseurl');
@@ -196,6 +208,11 @@ abstract class supa_object {
         }
 
         return $url;
+    }
+
+    public function fetchFromClassname($classname)
+    {
+        var_dump($classname);
     }
 
 }
