@@ -4,7 +4,7 @@
  * Mediator provides a common base so all the parts can work together.
  * It's like a really shitty kernel
  */
-require_once(__DIR__ . DS . 'abstract/object.php');
+require_once(dirname(__FILE__).DS. 'abstract/object.php');
 class supa_mediator extends supa_object {
 
     static $_all = array();
@@ -21,7 +21,7 @@ class supa_mediator extends supa_object {
     {
 
         $this->loadConfig()
-            ->setConfig('path/basedir', realpath(__DIR__.DS.'..'.DS).DS)
+            ->setConfig('path/basedir', realpath(dirname(__FILE__).DS.'..'.DS).DS)
             ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
             ->setConfig('path/appdir', $this->getConfig('path/basedir').self::CLASS_PREFIX.DS)
             ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
@@ -44,7 +44,7 @@ class supa_mediator extends supa_object {
     {
         foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
 
-        $loadpath = __DIR__.DS.'modules'.DS;
+        $loadpath = dirname(__FILE__).DS.'modules'.DS;
 
         $_sorted = array_merge_recursive($this->_order, glob($loadpath.'*'.PHP));
 	foreach($_sorted as $module)
@@ -66,7 +66,7 @@ class supa_mediator extends supa_object {
      */
     public function loadConfig()
     {
-        $this->setConfig((array) json_decode(json_encode(simplexml_load_file(__DIR__.DS.self::CONFIG_PATH)), true));
+        $this->setConfig((array) json_decode(json_encode(simplexml_load_file(dirname(__FILE__).DS.self::CONFIG_PATH)), true));
         return $this;
     }
 

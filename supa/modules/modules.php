@@ -12,7 +12,7 @@ class supa_modules extends supa_object {
 
     protected function loadModules()
     {
-        foreach(glob(__DIR__.DS.'*') as $moduledir)
+        foreach(glob(dirname(__FILE__).DS.'*') as $moduledir)
         {
 
             if(basename($moduledir) == 'abstract') continue;
