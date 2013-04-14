@@ -23,7 +23,7 @@
 class supa_do extends supa_object {
 
     const DO_REQUEST_SUCCESS = 200;
-    const DO_REQUEST_FAIL = 200;
+    const DO_REQUEST_FAIL = 400;
 
     public function __construct()
     {
@@ -62,11 +62,11 @@ class supa_do extends supa_object {
             $this->getModule('session')->saveSession();
 
             if($result) {
-                http_response_code(self::DO_REQUEST_SUCCESS);
+                $this->setResponse('requestCode', self::DO_REQUEST_SUCCESS);
                 echo $result;
                 exit;
             } else {
-                http_response_code(self::DO_REQUEST_FAIL);
+                $this->setResponse('requestCode', self::DO_REQUEST_FAIL);
                 exit;
             }
 
