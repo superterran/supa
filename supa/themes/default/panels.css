@@ -1,19 +1,28 @@
 #panel {
 
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0,0,0,.6);
     color: aliceblue;
     display: block;
     overflow: auto;
-    padding: 10px;
     font-size: 20px;
-
-    /*position: fixed;*/
-  position: relatve;
+    position: relative;
     top: 0px;
     left:0px;
     right:0px;
     z-index: 9000;
     max-height: 80%;
+    margin: 0px;
+
+    padding-bottom:7px;
+
+    border-bottom: 2px solid #222;
+
+    box-shadow: 0px 0px 19px #111;
+    text-shadow: 0px 0px #111;
+}
+
+#panel a {
+    color: oldlace;
 }
 
 #panel #panel_menu {
@@ -29,6 +38,10 @@
     float: left;
     padding-right: 20px;
 
+}
+
+#panel #panel_menu li:last-child {
+    padding-right: 0px;
 }
 
 
@@ -63,46 +76,61 @@
 
 #panel div.tree {
     float: left;
-    width: 200px;
-    /*margin-top: -50px;*/
-    /*border: 1px solid white;*/
+width: 100%; border: 1px solid green;
 
 }
 
-#panel ul.tree {
 
-    margin: 0px;
-    padding: 0px;
+#panel div.panel_content {
 
-
-}
-
-#panel .tree li {
-
-    font-size: 16px;
-    /*border: 1px solid green;*/
-    list-style: none;
-    margin: 0px;
-    display: block;
-    padding: 5px;
-    cursor: pointer;
-}
-
-#panel div.panelcontent {
-
-    width: 750px;
-    float: right;
-    overflow-y: auto;
-    max-height: 500px;
-
-}
-
-#panel div.panelcontent table {
     width: 100%;
-    font-weight: 200;
+    clear: both;
+
 }
 
-#panel div.panelcontent th  {
+
+#panel div.panel_content table {
+    width: 100%;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+}
+
+#panel div.panel_content th  {
     text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: white;
 }
 
+#panel div.panel_content tr:hover  {
+    color: lavenderblush;
+}
+
+#ribbon {
+    position: relative;
+    overflow-y: auto;
+    padding-top:5px;
+}
+
+#ribbon .faded {
+    color: lightblue;
+    font-weight: 100;
+}
+
+a#panel_close_button {
+    color: lightslategrey;
+}
+
+
+#panel_close {
+    text-align: right;
+    top: -25px;
+    position: relative;
+    height: 0px;
+}
+
+.panelModalContainer {
+
+    padding-top: 20px;
+    padding-bottom: 30px;
+}

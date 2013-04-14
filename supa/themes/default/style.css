@@ -7,6 +7,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     margin: 0;
+    background-image: url('img/noise.png');
 }
 
 
@@ -23,78 +24,65 @@ a:hover {
 #header  {
     font-size: 48px;
     color: lavender;
-
-    width: 100%;
-    text-align: center;
     font-weight: 200;
     display: block;
     clear: both;
-    padding-left: 0px;
+    margin-top:40px;
+}
 
-    height: 70px;    margin-left: -30px;
+#header .navigation li {
+    font-size: 24px;
 }
 
 .logo {
-    display: block;
+
     font-size: 48px;
 }
 
-#navigation ul {
+div.navigation {
+    display: table;
+}
 
-    display: block;
-    border: 1px solid green;
+
+ul.navigation  {
+
+    display: table-row;
     float: left;
-    clear: both;
+    /*clear: both;*/
     padding: 0px;
-
-
-
-}
-
-#navigation li {
-    /*border: 1px solid green;*/
-    float: left;
-    list-style: none;
-
-    font-size: 24px;
-    height: 50px;
     position: relative;
+    margin: 0px;
 
-    clear: right;
-    padding-right: 20px;
 }
 
-#navigation li a {
-    bottom: 0px;
-    display: inline;
-    bottom: 0px;
-    padding-top: 22px;
-    float: left;
+.navigation li {
+
+
+    list-style: none;
+    padding: 5px 20px 5px 0;
+    font-size: 16px;
+    margin: 0px;
+    cursor: pointer;
+    display: table-cell;
 }
 
-#navigation li:first-child a {
-    padding-top: 0px;
+.navigation li a {
+
+    bottom: 0px
 }
 
-h1 {
 
-    font-size: 32px;
+h1 { font-size: 32px }
+h2 { font-size: 29px }
+h3 { font-size: 24px }
+h4 { font-size: 22px }
+h5 { font-size: 20px }
+h6 { font-size: 18px }
+h1,h2,h3,h4,h5,h6 {
+    margin: 0px;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-}
-
-h2 {
-
-    font-size: 29px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-}
-
-h3 {
-
-    font-size: 24px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
+    display: block;
 }
 
 .heading {
@@ -109,7 +97,10 @@ h3 {
     margin: 0 auto;
     max-width: 960px;
     width: 960px;
-    overflow: auto;
+    /*overflow: auto;*/
+
+    clear: both;
+
 }
 
 #content {
@@ -306,8 +297,12 @@ h3 {
 
 }
 
-#most { background-color: rgba(255,255,255, .2); color: lavender }
+#most { background-color: rgba(255,255,255, .2); color: lavender; overflow: auto; }
 
 .center {
+    text-align: center;
+}
+
+.text-center {
     text-align: center;
 }

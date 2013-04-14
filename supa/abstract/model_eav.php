@@ -220,7 +220,8 @@ abstract class supa_model_eav extends supa_model
         $data = array();
         foreach($entities as $entity)
         {
-            $data[$entity['entity']] = $this->getEntityLabel($entity['entity']);
+            $label = $this->getEntityLabel($entity['entity']);
+            if(is_string($label)) $data[$entity['entity']] = $label;
         }
 
         return $data;
@@ -257,7 +258,9 @@ abstract class supa_model_eav extends supa_model
     protected function getAttributes()
     {
         $data = array();
-        foreach($this->sql( $this->where() . " and meta = 'false' ") as $attrib) {
+        $sql = $this->sql( $this->where() . " and meta = 'false' ");
+        if(!$sql) return false;
+        foreach($sql as $attrib) {
 
             $getmeta = $this->sql($this->where(). " and meta = '".$attrib['attribute']."'");
 

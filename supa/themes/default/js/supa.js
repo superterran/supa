@@ -8,13 +8,8 @@ supa = Class.create({
 
     initialize: function () {
 
-//        var sites = this.doAction('lastChange', {'part':'sites'});
-//        this.sites_lastChange = sites;
-//
-//        var pile = this.doAction('lastChange', {'part':'pile'});
-//        this.pile_lastChange = pile;
-
         this.MessagesObserver();
+        Effect.Appear($('panel'));
 
     },
 
@@ -45,16 +40,24 @@ supa = Class.create({
                 }
 
                 if (200 === response.status) {
-                    doto.innerHTML = response.responseText;
-                    return;
+                    if(response.responseText) {
+
+                        if(doto.innerHTML == "") doto.hide();
+                        if(doto.style.display != "none")
+                        {
+                            Effect.SlideUp(doto, { afterFinish: function() { doto.innerHTML = response.responseText; Effect.SlideDown.delay(.5, (doto)); }});
+                            return;
+                        } else {
+                            doto.innerHTML = response.responseText;
+                            Effect.SlideDown(doto);
+                            return;
+                        }
+                    }
                 }
 
                 doto.addClassName('problem');
             }.bind(this)
         });
-
-
-
     },
 
     MessagesObserver: function () {
@@ -63,6 +66,17 @@ supa = Class.create({
             Effect.BlindUp.delay(5, 'messages', { duration: 1.0 });
 //            e.dropOut({ duration: 6.0}).delay(5);
         }.bind(this));
+    },
+
+    close: function(doto)
+    {
+        Effect.BlindUp(doto, {afterFinish: function() {doto.innerHTML = ''; }});
+    },
+
+    panelClose: function()
+    {
+        this.close($('panel_modal_container'));
     }
+
 
 });

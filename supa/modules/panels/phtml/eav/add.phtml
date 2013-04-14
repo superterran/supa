@@ -1,10 +1,14 @@
 <h2>Add <?php echo $this->grabEntityLabel(); ?></h2>
 <form>
 
-<?php foreach($this->grabAttributes() as $attribute): ?>
-        <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'])->setData($attribute)->toHtml(); ?></div>
- <?php endforeach; ?>
-
+<?php $attributes = $this->grabAttributes() ?>
+<?php if($attributes): ?>
+    <?php foreach($attributes as $attribute): ?>
+           <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'])->setData($attribute)->toHtml(); ?></div>
+     <?php endforeach; ?>
+<?php else: ?>
+    <h2>There are no attributes assigned to this entity.</h2>
+<?php endif; ?>
     <button type="submit">Add</button>
 
 </form>

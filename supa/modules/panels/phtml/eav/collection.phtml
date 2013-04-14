@@ -1,13 +1,15 @@
-<h2><?php echo $this->grabEntityLabel(); ?> Collection</h2>
-<ul>
+<div class="panelModalContainer">
+<h3><?php echo $this->grabEntityLabel(); ?> Collection</h3>
 
+<?php $collection = $this->grabAttributes(false) ?>
+<?php if($collection): ?>
     <table>
         <thead>
             <tr>
                 <th></th>
-            <?php foreach($this->grabAttributes(false) as $val => $attr): ?>
-                <th><?php if(isset($attr['label'])) echo $attr['label']; else echo $attr['attribute']; ?></th>
-            <?php endforeach ?>
+                <?php foreach($collection as $val => $attr): ?>
+                    <th><?php if(isset($attr['label'])) echo $attr['label']; else echo $attr['attribute']; ?></th>
+                <?php endforeach ?>
                 <td onclick="supa.doAction('panels/eav/add', {'entity':'<?php echo $this->getDo('entity') ?>'}, $('panelcontent'))">Add</td>
             </tr>
         </thead>
@@ -22,4 +24,10 @@
             <?php endforeach ?>
         </tbody>
     </table>
-</ul>
+    </div>
+<?php else: ?>
+    <div id="container" class="text-center">
+        <h3>Empty Collection <a herf="#" onclick="supa.doAction('panels/eav/add', {'entity':'<?php echo $this->getDo('entity') ?>'}, $('panelcontent'))"> New Item</a></h3>
+    </div>
+
+<?php endif; ?>
