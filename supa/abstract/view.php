@@ -103,7 +103,7 @@ abstract class supa_view extends supa_object {
             $count = 1;
         }
 
-        var_dump(count($_layout), $count); die();
+//        var_dump(count($_layout), $count); die();
 
         return $count;
 

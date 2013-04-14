@@ -7,9 +7,9 @@ class supa_modules_panels_views_eav_collection extends supa_view {
         return $this->model('panels/eav')->getEntityLabel($this->getDo('entity'));
     }
 
-    public function grabAttributes()
+    public function grabAttributes($ismeta)
     {
-        return $attributes = $this->model('panels/eav')->getAllAttributes($this->getDo('entity'));
+        return $attributes = $this->model('panels/eav')->getAllAttributes($this->getDo('entity'), $ismeta);
     }
 
     public function grabCollection()

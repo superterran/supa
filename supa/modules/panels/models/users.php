@@ -47,10 +47,14 @@ class supa_modules_panels_models_users extends supa_model_eav {
 //            ->filter('email', '=', $email)
             ->filter('password', '=', $password)
             ->getCollection('first');
-var_dump($user);
+
         if($user) {
 
+            //var_dump($user, key($user)); die();
+            $user = $this->model('panels/users')->load($user['id']);
+
             unset($user['password']);
+
             $this->setSession('user', $user);
 
             $this->setSession('messages', array('success'=>"Hey! you just logged in!"));

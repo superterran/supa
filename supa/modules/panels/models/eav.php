@@ -8,14 +8,16 @@ class supa_modules_panels_models_eav extends supa_model_eav {
 
     public function getCollectionByEntity($entity)
     {
-        return $this->model('panels/eav')->setEntity($entity)->getCollection();
+
+        $col = $this->model('panels/eav')->setEntity($entity)->getCollection();
+        return $col;
 
     }
 
-    public function getAllAttributes($entity = false)
+    public function getAllAttributes($entity = false, $ismeta = false)
     {
         if($entity) $this->setEntity($entity);
-        return $this->getAttributes();
+        return $this->getAttributes($ismeta);
     }
 
 }

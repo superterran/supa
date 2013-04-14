@@ -4,20 +4,21 @@
     <table>
         <thead>
             <tr>
-                <?php foreach($this->grabAttributes() as $attr): ?>
-                    <th><?php echo $attr['attribute'] ?></th>
-                <?php endforeach ?>
+                <th></th>
+            <?php foreach($this->grabAttributes(false) as $val => $attr): ?>
+                <th><?php if(isset($attr['label'])) echo $attr['label']; else echo $attr['attribute']; ?></th>
+            <?php endforeach ?>
                 <td onclick="supa.doAction('panels/eav/add', {'entity':'<?php echo $this->getDo('entity') ?>'}, $('panelcontent'))">Add</td>
             </tr>
         </thead>
         <tbody>
             <?php foreach($this->grabCollection() as $item): ?>
-                <tr>
-                    <?php foreach($this->grabAttributes() as $attr): ?>
-                        <td><?php echo $item[$attr['attribute']] ?></td>
-                    <?php endforeach ?>
-                    <td><a href="#" onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $this->getDo('entity') ?>', 'perform': ['model','panels/eav','delete', '<?php echo $item['id'] ?>']}, $('panelcontent'))">Remove</a></td>
-                </tr>
+            <tr>
+                <?php foreach($item as $att => $val): ?>
+                    <td><?php echo $val; ?></td>
+                <?php endforeach ?>
+                <td><a href="#" onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $this->getDo('entity') ?>', 'perform': ['model','panels/eav','delete', '<?php echo $item['id'] ?>']}, $('panelcontent'))">Remove</a></td>
+            </tr>
             <?php endforeach ?>
         </tbody>
     </table>

@@ -155,7 +155,7 @@ abstract class supa_object {
         if(empty($_obj)) return false;
         if(is_string($_obj) && $_obj === 'false') return (bool) false; // thank god
         if(is_string($_obj) && $_obj === 'true') return (bool) true; // thank god
-        
+
         return $_obj;
     }
 
