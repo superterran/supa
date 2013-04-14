@@ -1,8 +1,12 @@
+<?php $entities = $this->getEntities() ?>
 <ul class="navigation">
     <li><h2>Entities</h2></li>
-    <?php foreach($this->getEntities() as $entity => $label): ?>
-        <li onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $entity ?>'}, $('panelcontent'))"><?php echo $label ?></li>
-    <?php endforeach ?>
+    <?php if($entities): ?>
+        <?php foreach($this->getEntities() as $entity => $label): ?>
+            <li onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $entity ?>'}, $('panelcontent'))"><?php echo $label ?></li>
+        <?php endforeach ?>
+    <?php elseif: ?>
+        <div class="container text-center"><h3>No Entities Available</h3></div>
+    <?php endif ?>
 </ul>
-
 <div id="panelcontent"  class="panel_content"></div>

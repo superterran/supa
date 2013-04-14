@@ -218,6 +218,7 @@ abstract class supa_model_eav extends supa_model
         $entities = $this->sql('select entity from {{eav_table}} group by entity desc');
 
         $data = array();
+        if(!$entities) return false;
         foreach($entities as $entity)
         {
             $label = $this->getEntityLabel($entity['entity']);
