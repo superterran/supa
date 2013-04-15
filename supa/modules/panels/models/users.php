@@ -13,7 +13,7 @@ class supa_modules_panels_models_users extends supa_model_eav {
     public function isLoggedIn($kick = false)
     {
 
-        if($this->getSession('user/email')) {
+        if(is_string($this->getSession('user/email'))) { 
             return true;
         } else {
             if($kick == true) {
