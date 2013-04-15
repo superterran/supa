@@ -34,8 +34,8 @@ abstract class supa_model_eav extends supa_model
         $creds = $this->getConfig('mysql');
         if(empty($creds['pass'])) $pass=false; else $pass = $creds['pass'];
         $this->_tap = mysql_connect($creds['host'], $creds['user'], $pass);
-        $result = mysql_select_db($creds['database'], $this->_tap);
-
+        mysql_select_db($creds['database'], $this->_tap);
+        $result = $this->sql("describe {{eav_table}};");
         if(!$result) $this->createTable();
     }
 
@@ -53,7 +53,8 @@ abstract class supa_model_eav extends supa_model
                 ) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=latin1;
         ");
 
-        $this->sql("use {{eav_table}}");
+        die('here');
+
     }
 
     public function getCollection($part = false)
