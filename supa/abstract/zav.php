@@ -53,8 +53,6 @@ abstract class supa_model_eav extends supa_model
                 ) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=latin1;
         ");
 
-        die('here');
-
     }
 
     public function getCollection($part = false)
