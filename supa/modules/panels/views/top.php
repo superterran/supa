@@ -11,7 +11,7 @@ class supa_modules_panels_views_top extends supa_view {
 
     public function getPanelInit()
     {
-        if(!$this->getSession('justLoggedIn') == false)
+        if($this->getSession('justLoggedIn') == false)
         {
             $output = "$('panel').show();"; //@todo fix this
         } else {
