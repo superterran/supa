@@ -4,19 +4,21 @@ class supa_modules_panels_controls_users extends supa_control {
 
     public function indexAction()
     {
+//        var_dump($this->view('panels/users/login')->toHtml());
         $this->addLayout('content', $this->view('panels/users/login'));
     }
 
-    public function addAction()
+    public function registerAction()
     {
         $this->addLayout('content', $this->view('panels/users/register'));
     }
 
-    public function attemptAction()
+    public function attemptRegisterAction()
     {
         // for the time being, assume all new users should be added indiscrimately...
 
         $creds = $this->getDo();
+        var_dump($this->getDo());
         $errors = array();
 
         if(!$creds['email']) $errors[] = array('error'=>'email is a required field.');
@@ -29,12 +31,12 @@ class supa_modules_panels_controls_users extends supa_control {
             $this->setRequest('messages', $errors);
         }
 
-        $this->loginAction();
+        $this->attemptAction();
     }
 
-    public function loginAction()
+    public function attemptAction()
     {
-        if($this->model('panels/users')->login($this->getDo('email'), $this->getDo('password')));
+        $this->model('panels/users')->login($this->getDo('email'), $this->getDo('password'));
     }
 
     public function logoutAction()

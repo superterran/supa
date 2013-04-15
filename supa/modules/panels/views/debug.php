@@ -12,4 +12,5 @@ class supa_modules_panels_views_debug extends supa_view {
         }
 
     }
+
 }

@@ -51,7 +51,7 @@
                 </login>
 
                 <register>
-                    <class>supa_modules_panels_views_Users_register</class>
+                    <class>supa_modules_panels_views_users_register</class>
                     <phtml>users/register.phtml</phtml>
                 </register>
             </users>
@@ -96,5 +96,26 @@
 
         </panels>
     </views>
+
+    <observers>
+        <page_render_before>
+            <order>0</order>
+            <class>supa_modules_panels_views_debug</class>
+            <method>setActive</method>
+        </page_render_before>
+
+        <page_render_after>
+            <order>0</order>
+            <class>supa_modules_panels_views_debug</class>
+            <method>echoHtml</method>
+        </page_render_after>
+
+        <panels_users_login_success>
+            <order>0</order>
+            <class>supa_modules_panels_views_top</class>
+            <method>firstLogin</method>
+        </panels_users_login_success>
+
+    </observers>
 
 </module>

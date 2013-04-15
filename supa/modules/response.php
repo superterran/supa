@@ -21,6 +21,8 @@ class supa_response extends supa_object {
     {
         $redirect = $this->getResponse('redirect');
         if($redirect) {
+
+            $this->observe('redirect_before');
             header('location: '. $this->getUrl($redirect)); exit; // @todo kill the exit
             return true;
         }
@@ -29,7 +31,9 @@ class supa_response extends supa_object {
 
     public function send()
     {
+        $this->observe('page_render_before');
         $this->sendResponse();
+        $this->observe('page_render_after');
     }
 
     protected function sendResponse($output = false, $code = false)

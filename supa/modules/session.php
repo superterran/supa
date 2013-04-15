@@ -19,6 +19,7 @@ class supa_session extends supa_object {
     {
         $_SESSION = array();
         $_SESSION = $this->getSession();
+
     }
 
 

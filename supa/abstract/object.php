@@ -22,8 +22,9 @@ abstract class supa_object {
         $path = false; if(isset($params[0])) $path = $params[0];
         $value = false; if(isset($params[1])) $value = $params[1];
 
+//        if(!$params[1] = 'observe') $this->observe('supa_call_'.$methodName); // calling observer manually so not to cause recursion
 //        var_dump($methodPrefix, $spineKey, $path, $value); echo '<br><br>';
-
+//
         switch($methodPrefix)
         {
             /**
@@ -33,8 +34,8 @@ abstract class supa_object {
              *
              * let's $this->getView('blog/item') return an instantiated class
              */
-            case "dispatch": // Show a view object
-                return $this->getModule('observe')->dispatch($path);
+            case "observe": // Show a view object
+                return $this->getModule('observe')->event($path, $value);
             break;
 
             case "view": // Show a view object
@@ -76,6 +77,7 @@ abstract class supa_object {
              * we have the one interface to do damn near everything.
              */
             case "get":
+//                var_dump($methodName.'+'.$path, $params);
                 if(isset($mainObj[$spineKey])) return $this->getPath($mainObj[$spineKey], $path); else return false;
             break;
 
@@ -89,6 +91,7 @@ abstract class supa_object {
                     $parts = explode(DS, $path);
 
                     if(!isset($parts[1])) {
+//                        var_dump($value);
                         $mainObj[$spineKey][$path] = $value;
                     } else {
                         /**
@@ -114,10 +117,19 @@ abstract class supa_object {
             break;
 
             case "add":
-                if(isset($params[0]) && isset($params[1])) {
+//                var_dump($params[0], $params[1]);
+                if(isset($params[1])) {
                     $mainObj[$spineKey][$params[0]][] = $params[1];
+                } elseif(isset($params[0])) {
+                    if(is_string($mainObj[$spineKey][$params[0]]))
+                    {
+                        $mainObj[$spineKey][$params[0]] = array($mainObj[$spineKey][$params[0]]);
+                    }
+                } else {
+                    $mainObj[$spineKey][$params[0]] = array();
                 }
-            return $this;
+                return $this;
+            die();
             break;
 
             case 'merge':
@@ -134,8 +146,9 @@ abstract class supa_object {
 
         }
 
-        echo 'method does not exist:'. $methodName.'<br>';
+        echo '<pre><h3>method does not exist:'. $methodName.'<h3>';
         var_dump(debug_backtrace());
+        echo '</pre>';
     //    die();
     }
 
@@ -158,8 +171,8 @@ abstract class supa_object {
         // sanitization
 
         if(empty($_obj)) return false;
-        if(is_string($_obj) && $_obj === 'false') return (bool) false; // thank god
-        if(is_string($_obj) && $_obj === 'true') return (bool) true; // thank god
+        if(is_string($_obj) && $_obj == 'false') return (bool) false; // thank god
+        if(is_string($_obj) && $_obj == 'true') return (bool) true; // thank god
 
         return $_obj;
     }
@@ -213,11 +226,6 @@ abstract class supa_object {
         }
 
         return $url;
-    }
-
-    public function fetchFromClassname($classname)
-    {
-        var_dump($classname);
     }
 
 }

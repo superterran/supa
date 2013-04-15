@@ -11,15 +11,23 @@ class supa_modules_panels_views_top extends supa_view {
 
     public function getPanelInit()
     {
-        if(!$this->getSession('panels/lastload') == true)
+        if(!$this->getSession('justLoggedIn') == false)
         {
-            return "$('panel').show();"; //@todo fix this
+            $output = "$('panel').show();"; //@todo fix this
         } else {
-            $this->setSession('panels/lastload',  true);
-            return "Effect.Appear($('panel'));";
+            $output = "Effect.Appear($('panel'));";
         }
 
+        $this->setSession('justLoggedIn',  'false');
 
+
+        return $output;
+
+    }
+
+    public function firstLogin()
+    {
+        $this->setSession('justLoggedIn', 'true');
     }
 
 }

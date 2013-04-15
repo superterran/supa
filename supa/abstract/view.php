@@ -143,8 +143,13 @@ abstract class supa_view extends supa_object {
 
     public function setActive($bool = true)
     {
-        $this->_active($bool);
+        $this->_active = $bool;
         return $this;
+    }
+
+    public function echoHtml()
+    {
+        echo $this->toHtml();
     }
 
 }

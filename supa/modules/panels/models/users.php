@@ -26,13 +26,14 @@ class supa_modules_panels_models_users extends supa_model_eav {
 
     public function logout()
     {
-        $this->setSession('user','false');
+        $this->setSession('user', 'false');
         $this->setSession('messages', array('success'=>'You have been logged out.'));
         $this->setResponse('redirect',$this->getConfig('paths/baseurl'));
     }
 
     public function login($email, $password)
     {
+        $this->observe('panels_users_login_attempt');
 
         if(!$email || !$password) {
             $this->setSession('messages', array('error'=>'Please supply credentials.'));
@@ -60,13 +61,15 @@ class supa_modules_panels_models_users extends supa_model_eav {
             $this->setSession('messages', array('success'=>"Hey! you just logged in!"));
             $this->setResponse('redirect', $this->getConfig('paths/baseurl'));
 
+            $this->observe('panels_users_login_success');
+            $this->observe('panels_users_login_success');
             return true;
 
         } else {
 
             $this->setSession('messages', array('error'=>'Sorry, invalid username or password. Please try again!'));
             $this->setResponse('redirect','panels/users');
-
+            $this->observe('panels_users_login_failure');
             return false;
         }
     }

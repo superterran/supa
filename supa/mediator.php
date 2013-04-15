@@ -20,16 +20,15 @@ class supa_mediator extends supa_object {
     public function __construct()
     {
 
-           $this->setConfig('path/appdir', realpath(dirname(__FILE__)).DS)
-                ->setConfig('path/basedir', realpath($this->getConfig('path/appdir').'..'.DS).DS)
-                ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
-                ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
-                ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS)
-                ->setConfig('path/modulesdir', $this->getConfig('path/appdir').'modules'.DS)
-                ->setConfig('path/configxml', $this->getConfig('path/appdir').self::CONFIG_PATH);
+       $this->setConfig('path/appdir', realpath(dirname(__FILE__)).DS)
+            ->setConfig('path/basedir', realpath($this->getConfig('path/appdir').'..'.DS).DS)
+            ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
+            ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
+            ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS)
+            ->setConfig('path/modulesdir', $this->getConfig('path/appdir').'modules'.DS)
+            ->setConfig('path/configxml', $this->getConfig('path/appdir').self::CONFIG_PATH);
 
         $this->loadConfigXml();
-
 
         $this->_order[] = $this->getConfig('path/modulesdir').'session.php';
         $this->_order[] = $this->getConfig('path/modulesdir').'modules.php';
