@@ -18,7 +18,6 @@ class supa_modules_panels_controls_users extends supa_control {
         // for the time being, assume all new users should be added indiscrimately...
 
         $creds = $this->getDo();
-        var_dump($this->getDo());
         $errors = array();
 
         if(!$creds['email']) $errors[] = array('error'=>'email is a required field.');
