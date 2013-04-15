@@ -9,6 +9,7 @@ supa = Class.create({
     initialize: function () {
 
         this.MessagesObserver();
+        this.panelObserver();
 
 
     },
@@ -64,7 +65,7 @@ supa = Class.create({
 
         $$('#messages li').each(function (e) {
             Effect.BlindUp.delay(5, 'messages', { duration: 1.0 });
-//            e.dropOut({ duration: 6.0}).delay(5);
+
         }.bind(this));
     },
 
@@ -76,7 +77,41 @@ supa = Class.create({
     panelClose: function()
     {
         this.close($('panel_modal_container'));
+    },
+
+    move: function(doto, x, y) {
+
+        new Effect.Move(doto, { x: x, y: y, mode: 'absolute' });
+
+    },
+
+    panelHide: function()
+    {
+        this.move('panel', 0, -30);
+    },
+
+    panelShow: function()
+    {
+        this.move('panel', 0, 0);
+    },
+
+    panelObserver: function()
+    {
+
+        $('panel-sensor').observe('mouseout', function(e) {
+            console.log($('panel_modal_container').style.display);
+            if($('panel_modal_container').style.display == 'none') {
+                this.panelHide();
+            }
+        }.bind(this));
+
+        $('panel').observe('mousemove', function(e) {
+            this.panelShow();
+        }.bind(this));
+
+
     }
+
 
 
 });

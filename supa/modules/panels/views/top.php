@@ -13,16 +13,14 @@ class supa_modules_panels_views_top extends supa_view {
     {
         if($this->getSession('justLoggedIn') == false)
         {
-            $output = "$('panel').show();"; //@todo fix this
+            $output = "$('panel').show();$('panel').style.top = -30;"; //@todo fix this
         } else {
             $output = "Effect.Appear($('panel'));";
         }
 
         $this->setSession('justLoggedIn',  'false');
 
-
         return $output;
-
     }
 
     public function firstLogin()
