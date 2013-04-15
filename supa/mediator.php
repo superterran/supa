@@ -20,13 +20,16 @@ class supa_mediator extends supa_object {
     public function __construct()
     {
 
-        $this->loadConfig()
-            ->setConfig('path/basedir', realpath(dirname(__FILE__).DS.'..'.DS).DS)
-            ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
-            ->setConfig('path/appdir', $this->getConfig('path/basedir').self::CLASS_PREFIX.DS)
-            ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
-            ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS)
-            ->setConfig('path/modulesdir', $this->getConfig('path/appdir').'modules'.DS);
+           $this->setConfig('path/appdir', realpath(dirname(__FILE__)).DS)
+                ->setConfig('path/basedir', realpath($this->getConfig('path/appdir').'..'.DS).DS)
+                ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
+                ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
+                ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS)
+                ->setConfig('path/modulesdir', $this->getConfig('path/appdir').'modules'.DS)
+                ->setConfig('path/configxml', $this->getConfig('path/appdir').self::CONFIG_PATH);
+
+        $this->loadConfigXml();
+
 
         $this->_order[] = $this->getConfig('path/modulesdir').'session.php';
         $this->_order[] = $this->getConfig('path/modulesdir').'modules.php';
@@ -44,31 +47,30 @@ class supa_mediator extends supa_object {
     {
         foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
 
-        $loadpath = dirname(__FILE__).DS.'modules'.DS;
+        $loadpath = $this->getConfig('path/modulesdir');
 
         $_sorted = array_merge_recursive($this->_order, glob($loadpath.'*'.PHP));
 	foreach($_sorted as $module)
         {
-            
-
             if(require_once($module)) {
 
                 $classname = str_replace(PHP, '', self::CLASS_PREFIX._.basename($module)); // supa_modules, for example
                 $name = str_replace(PHP, '', basename($module)); // modules, for example
                 if(class_exists($classname) && !is_object($this->getModule($name))) $this->setModule($name, new $classname());
             }
-
         }
     }
 
     /**
      * Loads config.xml into memory
      */
-    public function loadConfig()
+    public function loadConfigXml()
     {
-        $this->setConfig((array) json_decode(json_encode(simplexml_load_file(dirname(__FILE__).DS.self::CONFIG_PATH)), true));
+        $current_config = $this->getConfig();
+        $xml = simplexml_load_file($this->getConfig('path/configxml'));
+        $new_config = json_decode(json_encode($xml), true);
+        $this->setConfig(array_merge_recursive($new_config, $current_config));
         return $this;
     }
-
 
 }

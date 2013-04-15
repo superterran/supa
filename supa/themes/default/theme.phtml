@@ -1,4 +1,3 @@
-
 <!doctype>
 <html>
 <head>
@@ -21,65 +20,66 @@
             <li><a href="#">Something Else</a></li>
         </ul>
     </div>
-</div>
 
-<div id="most" class="container">
-    <div id="content">
-        <?php if($this->hasMessages()): ?>
-        <div id="messages">
+
+    <div id="most" class="container">
+        <div id="content">
+            <?php if ($this->hasMessages()): ?>
+                <div id="messages">
+                    <ul>
+                        <?php foreach ($this->grabMessages() as $type => $msg): ?>
+                            <li class="<?php echo $type; ?>"><?php echo $msg; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
+
+            <?php echo $this->html('content'); ?>
+
+        </div>
+
+        <div id="right">
+
+            <div class="avatar-wrapper">
+                <img id="supa-avatar" src="https://www.google.com/s2/photos/profile/107618603073236931621">
+
+                <div class="avatar-info">
+                    Doug Hatcher
+                </div>
+            </div>
+
             <ul>
-            <?php foreach($this->grabMessages() as $type => $msg): ?>
-                    <li class = "<?php echo $type; ?>"><?php echo $msg; ?></li>
-            <?php endforeach; ?>
+                <li><label>Lives in</label> Charleston, SC</li>
+                <li><label>From</label> Myrtle Beach, SC</li>
+                <li><label>Works at</label> <a href="http://www.blueacorn.com/" target="new">Blue Acorn</a></li>
+                <li><label>Hangs out on</label> <a href="https://plus.google.com/107618603073236931621/posts/p/pub">Google
+                        Plus</a>
+                    and <a href="http://www.reddit.com/user/superterran/">Reddit</a>
+                </li>
             </ul>
         </div>
-        <?php endif; ?>
-
-
-        <?php echo $this->html('content'); ?>
 
     </div>
 
-    <div id="right">
-
-        <div class="avatar-wrapper">
-            <img id="supa-avatar" src="https://www.google.com/s2/photos/profile/107618603073236931621">
-            <div class="avatar-info">
-                Doug Hatcher
-            </div>
+    <div class="container">
+        <div id="footer">
+            <div class="text">Built with the <a href="https://github.com/superterran/supa" target="new">Supa Framework</a></div>
         </div>
-
-        <ul>
-            <li><label>Lives in</label> Charleston, SC</li>
-            <li><label>From</label> Myrtle Beach, SC</li>
-            <li><label>Works at</label> <a href="http://www.blueacorn.com/" target="new">Blue Acorn</a></li>
-            <li><label>Hangs out on</label> <a href="https://plus.google.com/107618603073236931621/posts/p/pub">Google Plus</a>
-                and <a href="http://www.reddit.com/user/superterran/">Reddit</a>
-            </li>
-        </ul>
     </div>
+
 
 </div>
 
-<div class="container">
-    <div id="footer"><div class="text">Built with the <a href="https://github.com/superterran/supa" target="new">Supa Framework</a></div></div>
-
-    <div id="panels_login">
-        <?php if(!$this->model('panels/users')->isLoggedIn()): ?>
-            <a href="<?php echo $this->getUrl('panels/users/'); ?>">Panel</a></div>
-        <?php else: ?>
-            <a href="<?php echo $this->getUrl('panels/users/logout'); ?>">Logout</a></div>
-        <?php endif; ?>
-    </div>
+<script type="text/javascript">
+    var supa = new supa();
+    <?php echo $this->html('supa.js_after') ?>
 
 
-    <script type="text/javascript">
-        var supa = new supa();
+    //        supa.doAction('panels/eav/entities', false, $('panel_modal_container'));
+    //        supa.doAction('panels/eav/add', {'entity':'supa_modules_panels_models_users'}, $('panelcontent'))
 
-//
-//        supa.doAction('panels/eav/entities', false, $('panel_modal_container'));
-//        supa.doAction('panels/eav/add', {'entity':'supa_modules_panels_models_users'}, $('panelcontent'))
+</script>
 
-    </script>
 </body>
 </html>

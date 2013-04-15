@@ -3,6 +3,7 @@
 abstract class supa_view extends supa_object {
 
     protected $phtml = false;
+    public $_active = true;
 
     public function __construct($phtml = null)
     {
@@ -17,13 +18,13 @@ abstract class supa_view extends supa_object {
 
             $_data = $this->getData();
       //      var_dump($_data);
-            if(!isset($_data['eid']) || !$_data['eid']) return $this->__output();// using view individually
+            if(!isset($_data['eid']) || !$_data['eid']) return $this->outputBuffer();// using view individually
 
             $output = '';
 
             foreach($this->getData() as $item) // iterating through collection
             {
-                 $output .= $this->setData($item)->__output();
+                 $output .= $this->setData($item)->outputBuffer();
             }
             return $output;
 
@@ -31,11 +32,13 @@ abstract class supa_view extends supa_object {
         }
     }
 
-    public function __output()
+    protected function outputBuffer($file = false)
     {
+        if(!$file) $file = $this->getPhtml();
+
         $output = "";
         ob_start( );
-        include($this->getPhtml());
+        include($file);
         $output .= ob_get_clean();
         return $output;
     }
@@ -48,7 +51,13 @@ abstract class supa_view extends supa_object {
             $phtmlname = str_replace('_views_', '_phtml_', $classname);
             $this->phtml = $this->getConfig('path/basedir').str_replace('_',DS, $phtmlname).'.phtml';
         }
-        return $this->phtml;
+
+        if($this->isActive()) {
+            return $this->phtml;
+        } else {
+            return false;
+        }
+
     }
 
 
@@ -121,6 +130,21 @@ abstract class supa_view extends supa_object {
         $this->setSession('messages', 'empty');
         if(is_array($_msg)) return $_msg; else return false;
 
+    }
+
+    /**
+     * is the loaded view active?
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->_active;
+    }
+
+    public function setActive($bool = true)
+    {
+        $this->_active($bool);
+        return $this;
     }
 
 }

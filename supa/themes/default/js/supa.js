@@ -9,7 +9,7 @@ supa = Class.create({
     initialize: function () {
 
         this.MessagesObserver();
-        Effect.Appear($('panel'));
+
 
     },
 

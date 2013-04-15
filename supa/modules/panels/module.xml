@@ -34,20 +34,27 @@
 
     <views>
         <panels>
-            <main>
-                <class>supa_modules_panels_views_main</class>
-                <phtml>main.phtml</phtml>
-            </main>
+            <top>
+                <class>supa_modules_panels_views_top</class>
+                <phtml>top.phtml</phtml>
+            </top>
 
-            <login>
-                <class>supa_modules_panels_views_login</class>
-                <phtml>login.phtml</phtml>
-            </login>
+            <debug>
+                <class>supa_modules_panels_views_debug</class>
+                <phtml>debug.phtml</phtml>
+            </debug>
 
-            <add>
-                <class>supa_modules_panels_views_add</class>
-                <phtml>add.phtml</phtml>
-            </add>
+            <users>
+                <login>
+                    <class>supa_modules_panels_views_users_login</class>
+                    <phtml>users/login.phtml</phtml>
+                </login>
+
+                <register>
+                    <class>supa_modules_panels_views_Users_register</class>
+                    <phtml>users/register.phtml</phtml>
+                </register>
+            </users>
 
             <eav>
                 <entities>

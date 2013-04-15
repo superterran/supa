@@ -42,8 +42,6 @@ class supa_do extends supa_object {
 
         $do = $this->getDo();
 
-//        var_dump( $_SERVER );
-
         if($this->getDo('action') && $_SERVER['REQUEST_URI'] == DS)
         {
             $result = false;
@@ -56,7 +54,7 @@ class supa_do extends supa_object {
 
             if(isset($do['do'])) {
                 $view = $do['do'];
-                $result = $this->view($view)->toHtml(); // , $this->getDo('view')
+                $result = $this->view($view)->toHtml();
             }
 
             $this->getModule('session')->saveSession();

@@ -1,7 +1,5 @@
 <?php
 
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 define('DS', DIRECTORY_SEPARATOR);
@@ -16,20 +14,4 @@ $site->getModule('do')->action();
 $site->getModule('front')->control();
 $site->getModule('response')->send();
 
-if($site->model('panels/users')->isLoggedIn()): ?>
-<div id="supa-debug">
-    <pre>
-        <h1>Supa</h1>
-        <?php var_dump($site); ?>
-
-        <h1>Configuration</h1>
-        <?php var_dump($site->getConfig()); ?>
-
-
-        <h1>Spine ($_all)</h1>
-        <?php var_dump(supa_mediator::$_all); ?>
-
-    </pre>
-</div>
-<?php endif;
-var_dump(headers_list()); die();?>
+//echo $site->view('panels/debug')->toHtml();

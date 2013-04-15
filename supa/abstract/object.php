@@ -120,6 +120,11 @@ abstract class supa_object {
             return $this;
             break;
 
+            case 'merge':
+            if(isset($params[0]) && isset($params[1])) {
+                $mainObj[$spineKey][$params[0]] = array_merge_recursive($mainObj[$spineKey][$params[0]], $params[1]);
+            }
+
         }
 
         // better error handling

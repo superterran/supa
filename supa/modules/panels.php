@@ -7,20 +7,11 @@
  */
 class supa_panels extends supa_object {
 
-
     public function __construct()
     {
-
         if($this->model('panels/users')->isLoggedIn())
         {
-
-            $this->addLayout('panels', $this->view('panels/main'));
-
-            /**
-             * Figuring out what to do based on layout handle...
-             */
-             $handle = $this->getModule('front')->getLayoutHandle();
-
+            $this->addLayout('panels', $this->view('panels/top'));
         }
     }
 }

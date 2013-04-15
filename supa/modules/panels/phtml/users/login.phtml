@@ -1,0 +1,10 @@
+<h1>Login</h1>
+<p></p>
+
+<form action="<?php echo $this->getUrl('panels/users/attempt'); ?>" method="post">
+
+    <div class="row"><label>Email</label><input type="email" name="email"></div>
+    <div class="row"><label>Password</label><input type="password" name="password"></div>
+    <div class="row center"><button type="submit">login</button> <a href="<?php echo $this->getUrl('panels/users/register'); ?>">New Account</a></div>
+
+</form>

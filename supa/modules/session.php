@@ -13,14 +13,12 @@ class supa_session extends supa_object {
     public function __destruct()
     {
         $this->saveSession();
-//            var_dump($this->getSession());
     }
 
     public function saveSession()
     {
         $_SESSION = array();
         $_SESSION = $this->getSession();
-
     }
 
 

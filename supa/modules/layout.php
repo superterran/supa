@@ -1,6 +1,11 @@
 <?php
 
+/**
+ * by convention, layout is in $this->getLayout()
+ * Class supa_layout
+ */
 class supa_layout extends supa_view {
+
 
     public function render()
     {
@@ -10,18 +15,8 @@ class supa_layout extends supa_view {
         $this->setConfig('path/themedir', $this->getConfig('path/appdir').'themes'.DS.$this->getConfig('theme').DS);
         $this->setConfig('path/themeurl', $this->getConfig('path/appurl').'themes'.DS.$this->getConfig('theme').DS);
 
-        return $this->getOutput($themefile);
+        return $this->outputBuffer($themefile);
 
-    }
-
-    protected function getOutput($file)
-    {
-        ob_start();
-        require_once($file);
-        $output = ob_get_contents();
-        ob_end_clean();
-
-        return $output;
     }
 
 }
