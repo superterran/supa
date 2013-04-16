@@ -305,3 +305,12 @@ h1,h2,h3,h4,h5,h6 {
 .text-center {
     text-align: center;
 }
+
+#masthead {
+
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+}

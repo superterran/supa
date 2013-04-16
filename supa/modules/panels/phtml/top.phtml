@@ -1,26 +1,26 @@
 <?php $user = $this->model('panels/users')->getUser(); ?>
-<div id="panel-sensor">
-    <div id="panel" style="display:none">
-        <div id="panel_modal_wrapper">
-            <div id="panel_modal_container" class="container" style="display:none"></div>
-        </div>
-        <div id="panel_close" class="container">
-            <a href="#" id="panel_close_button" onclick="supa.panelClose()">Cancel</a>
-        </div>
-        <div class="container">
-            <div id="ribbon">
-                <span></span>
 
-                <ul class="navigation">
-                    <li><?php echo $this->getSession('user/email'); ?> </li>
-                    <li><a href="<?php echo $this->getUrl('panels/users/logout'); ?>" class="faded">Logout</a></li>
-                </ul>
+<div id="panel" style="display:none">
+    <div id="panel_modal_wrapper">
+        <div id="panel_modal_container" class="container" style="display:none"></div>
+    </div>
+    <div id="panel_close" class="container">
+        <a href="#" id="panel_close_button" onclick="supa.panelClose()">Cancel</a>
+    </div>
+    <div class="container">
+        <div id="ribbon">
+            <span></span>
+
+            <ul class="navigation">
+                <li><?php echo $this->getSession('user/email'); ?> </li>
+                <li><a href="<?php echo $this->getUrl('panels/users/logout'); ?>" class="faded">Logout</a></li>
+            </ul>
 
 
-                <ul id="panel_menu" class="navigation">
-                    <li><a href="#" onclick="supa.doAction('panels/eav/entities', false, $('panel_modal_container'))">EAV</a></li>
-                </ul>
-            </div>
+            <ul id="panel_menu" class="navigation">
+                <li><a href="#" onclick="supa.doAction('panels/eav/entities', false, $('panel_modal_container'))">EAV</a></li>
+            </ul>
         </div>
     </div>
 </div>
+<div id="panel-sensor"></div>

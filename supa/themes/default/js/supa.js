@@ -1,10 +1,8 @@
 var supa;
 supa = Class.create({
 
-    updateInterval: 5,
 
-    sites_lastChange: null,
-    pile_lastChange: null,
+    panelIdle: true,
 
     initialize: function () {
 
@@ -46,11 +44,15 @@ supa = Class.create({
                         if(doto.innerHTML == "") doto.hide();
                         if(doto.style.display != "none")
                         {
-                            Effect.SlideUp(doto, { afterFinish: function() { doto.innerHTML = response.responseText; Effect.SlideDown.delay(.5, (doto)); }});
+                            this.panelIdle = false;
+                            Effect.SlideUp(doto, { afterFinish: function() { doto.innerHTML = response.responseText; Effect.SlideDown.delay(.5, (doto)); this.panelIdle = true}.bind(this)});
                             return;
                         } else {
+
                             doto.innerHTML = response.responseText;
+                            this.panelIdle = false;
                             Effect.SlideDown(doto);
+                            this.panelIdle = true;
                             return;
                         }
                     }
@@ -71,7 +73,9 @@ supa = Class.create({
 
     close: function(doto)
     {
-        Effect.BlindUp(doto, {afterFinish: function() {doto.innerHTML = ''; }});
+
+        this.panelIdle = false;
+        Effect.BlindUp(doto, {afterFinish: function() {doto.innerHTML = ''; this.panelIdle = true }.bind(this)});
     },
 
     panelClose: function()
@@ -81,7 +85,10 @@ supa = Class.create({
 
     move: function(doto, x, y) {
 
-        new Effect.Move(doto, { x: x, y: y, mode: 'absolute' });
+        if(this.panelIdle) {
+            this.panelIdle = false;
+            new Effect.Move(doto, { x: x, y: y, mode: 'absolute', afterFinish: function() { this.panelIdle = true }.bind(this) });
+        }
 
     },
 
@@ -92,23 +99,46 @@ supa = Class.create({
 
     panelShow: function()
     {
-        this.move('panel', 0, 0);
+         this.move('panel', 0, 0);
     },
 
     panelObserver: function()
     {
 
         $('panel-sensor').observe('mouseout', function(e) {
-            console.log($('panel_modal_container').style.display);
-            if($('panel_modal_container').style.display == 'none') {
-                this.panelHide();
+
+            if(this.panelIdle) {
+
+                console.log($('panel_modal_container').style.display);
+                if($('panel_modal_container').style.display == 'none') {
+                    this.panelHide();
+                }
+
+            }
+
+        }.bind(this));
+
+        $('panel-sensor').observe('mouseover', function(e) {
+            if(this.panelIdle) {
+                    this.panelShow();
             }
         }.bind(this));
 
-        $('panel').observe('mousemove', function(e) {
-            this.panelShow();
-        }.bind(this));
 
+//        $('panel').observe('mousemove', function(e) {
+//            this.panelShow();
+//        }.bind(this));
+
+
+        new PeriodicalExecuter(function(pe) {
+
+            if ($('panel_modal_container').style.display == 'none') {
+//                alert('here');
+                if(this.panelIdle) {
+                    this.panelHide();
+                }
+            }
+        }.bind(this), 5);
 
     }
 
