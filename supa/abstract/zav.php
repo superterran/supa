@@ -33,8 +33,7 @@ abstract class supa_model_eav extends supa_model
     {
         $creds = $this->getConfig('mysql');
         if(empty($creds['pass'])) $pass=false; else $pass = $creds['pass'];
-        $this->_tap = mysql_connect($creds['host'], $creds['user'], $pass);
-        mysql_select_db($creds['database'], $this->_tap);
+        $this->_tap = new mysqli($creds['host'], $creds['user'], $pass, $creds['database']);
         $result = $this->sql("describe {{eav_table}};");
         if(!$result) $this->createTable();
     }
@@ -156,18 +155,18 @@ abstract class supa_model_eav extends supa_model
            echo '</pre>';
 
        }
-        $result = mysql_query($sql, $this->_tap);
+        $result = $this->_tap->query($sql);
         if(!$result && !$this->sql_hide_error) echo ('<span style="color:red">error:</span> '.mysql_error().'<br>'.$sql);
 
         if(!is_bool($result))
         {
-            while($row = mysql_fetch_assoc($result))
+            foreach($result as $row)
             {
                 $col[] = (array) $row;
             }
 
             if(isset($col)) return $col;
-            return mysql_fetch_assoc($result);
+            return $result;
         }
 
         return $result;
