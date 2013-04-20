@@ -9,6 +9,12 @@
 <?php else: ?>
     <h2>There are no attributes assigned to this entity.</h2>
 <?php endif; ?>
-    <button type="submit">Add</button>
+
+
+    <div class="row">
+        <label>Attribute</label> <input type="text" name="attribute">
+    </div>
+
+    <button onclick="supa.doAction('addAttribute', $('form'), $('panel_modal_container')); return false;">Add</button>
 
 </form>

@@ -236,7 +236,11 @@ abstract class supa_model_eav extends supa_model
 
         if(!$entity) $entity = $this->getEntity();
         $part = explode(_, $entity);
-        return $this->getModels($part[2].DS.$part[4].DS.'label');
+         $stuff = $this->getModels($part[2].DS.$part[4].DS.'label');
+
+        if(is_array($stuff)) return $stuff['class'];
+
+        return $stuff;
     }
 
 
