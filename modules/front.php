@@ -13,7 +13,7 @@ class supa_front extends supa_object {
 
         $classname = $controls[$ctrlaction[0]][$ctrlaction[1]];
 
-        require_once(str_replace(_, DS, $classname).PHP); // get controller path from classname
+        require_once($this->getClassFilepath($classname)); // get controller path from classname
         $controller = new $classname(); // instantiate controller
 
         if(isset($ctrlaction[2])) // deterimine what action to use
@@ -35,7 +35,7 @@ class supa_front extends supa_object {
 
         if($handle == 'fromUrl') {
             if(isset($_SERVER['REDIRECT_URL'])) {
-                $_handle = explode(DS, substr($_SERVER['REDIRECT_URL'], 1));
+                $_handle = $this->getPathFromUrl();
             } else {
                 $_handle = $_default;
             }
@@ -60,4 +60,10 @@ class supa_front extends supa_object {
 
         return $_handle;
     }
+
+    public function getPathFromUrl()
+    {
+        return $_handle = explode(DS, substr($_SERVER['REDIRECT_URL'], 1));
+    }
+
 }

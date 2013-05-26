@@ -5,8 +5,8 @@
 
     <controls>
         <default>
-            <index>example_index_index</index>
-            <error>example_index_error</error>
+            <index>pages_index_index</index>
+            <error>pages_index_error</error>
         </default>
     </controls>
 

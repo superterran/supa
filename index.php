@@ -7,7 +7,7 @@ define('_', '_');
 define('PHP', '.php');
 date_default_timezone_set('America/New_York');
 
-require_once('supa/mediator.php');
+require_once('mediator.php');
 
 $site = new supa_mediator();
 $site->getModule('do')->action();

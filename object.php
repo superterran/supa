@@ -197,11 +197,12 @@ abstract class supa_object {
      */
     protected function getClassFilepath($classname)
     {
+        $classname = str_replace('supa_', '',$classname);
         return $this->getConfig('path/basedir').str_replace(_, DS, $classname.PHP);
     }
 
     /**
-     * pass in a path 'example/index/index', get a url.
+     * pass in a path 'pages/index/index', get a url.
      * @param $path
      * @return string
      */

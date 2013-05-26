@@ -4,7 +4,7 @@
  * Mediator provides a common base so all the parts can work together.
  * It's like a really shitty kernel
  */
-require_once(dirname(__FILE__).DS. 'abstract/object.php');
+require_once(dirname(__FILE__) . DS . 'object.php');
 class supa_mediator extends supa_object {
 
     static $_all = array();
@@ -19,13 +19,13 @@ class supa_mediator extends supa_object {
 
     public function __construct()
     {
-
+;
        $this->setConfig('path/appdir', realpath(dirname(__FILE__)).DS)
-            ->setConfig('path/basedir', realpath($this->getConfig('path/appdir').'..'.DS).DS)
+            ->setConfig('path/basedir', $this->getConfig('path/appdir').DS)
             ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
-            ->setConfig('path/appurl', $this->getConfig('path/baseurl').self::CLASS_PREFIX.DS)
-            ->setConfig('path/absdir', $this->getConfig('path/appdir').self::ABSTRACT_DIRNAME.DS)
+            ->setConfig('path/appurl', $this->getConfig('path/baseurl').DS)
             ->setConfig('path/modulesdir', $this->getConfig('path/appdir').'modules'.DS)
+            ->setConfig('path/absdir', $this->getConfig('path/modulesdir').self::ABSTRACT_DIRNAME.DS)
             ->setConfig('path/configxml', $this->getConfig('path/appdir').self::CONFIG_PATH);
 
         $this->loadConfigXml();
@@ -44,7 +44,7 @@ class supa_mediator extends supa_object {
      */
     protected function loadModules()
     {
-        foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
+//        foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
 
         $loadpath = $this->getConfig('path/modulesdir');
 
@@ -53,8 +53,8 @@ class supa_mediator extends supa_object {
         {
             if(require_once($module)) {
 
-                $classname = str_replace(PHP, '', self::CLASS_PREFIX._.basename($module)); // supa_modules, for example
-                $name = str_replace(PHP, '', basename($module)); // modules, for example
+                $classname = str_replace(PHP, '', self::CLASS_PREFIX._.basename($module)); // supa_modules, for pages
+                $name = str_replace(PHP, '', basename($module)); // modules, for pages
                 if(class_exists($classname) && !is_object($this->getModule($name))) $this->setModule($name, new $classname());
             }
         }

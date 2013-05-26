@@ -1,15 +1,15 @@
 <module>
 
     <meta>
-        <name>Example</name>
+        <name>Pages</name>
         <description>An example module for the Supa framework</description>
         <active>true</active>
     </meta>
 
     <controls>
-        <example>
-            <index>supa_modules_example_controls_index</index>
-        </example>
+        <pages>
+            <index>supa_modules_pages_controls_index</index>
+        </pages>
     </controls>
 
 </module>

@@ -32,7 +32,7 @@ abstract class supa_view extends supa_object {
         }
     }
 
-    protected function outputBuffer($file = false)
+    public function outputBuffer($file = false)
     {
         if(!$file) $file = $this->getPhtml();
 

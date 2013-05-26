@@ -12,6 +12,10 @@ class supa_modules extends supa_object {
 
     protected function loadModules()
     {
+//        $this->getModule('observe')->event('supa_modules_loadModule_before');
+
+        foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
+
         foreach(glob($this->getConfig('path/modulesdir').'*') as $moduledir)
         {
 
@@ -31,5 +35,8 @@ class supa_modules extends supa_object {
                 }
             }
         }
+
+        $this->getObserve('supa_modules_loadModule_after');
+
     }
 }
