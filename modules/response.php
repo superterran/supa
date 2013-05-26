@@ -17,6 +17,12 @@ class supa_response extends supa_object {
         }
     }
 
+    public function redirect($url)
+    {
+        $this->setResponse($url);
+        $this->attemptRedirect();
+    }
+
     protected function attemptRedirect()
     {
         $redirect = $this->getResponse('redirect');

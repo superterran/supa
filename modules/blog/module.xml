@@ -18,6 +18,12 @@
                 <label>Blog Posts</label>
                 <class>supa_modules_blog_models_posts</class>
                 <tap>eav</tap>
+                <attributes>
+                    <byline>textfield</byline>
+                    <title>textfield</title>
+                    <email>textfield</email>
+                    <body>textfield</body>
+                </attributes>
             </posts>
         </blog>
     </models>

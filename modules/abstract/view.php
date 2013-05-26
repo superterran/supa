@@ -49,7 +49,8 @@ abstract class supa_view extends supa_object {
         if((!$phtml) || (!is_file($phtml)))
         {
             $phtmlname = str_replace('_views_', '_phtml_', $classname);
-            $this->phtml = $this->getConfig('path/basedir').str_replace('_',DS, $phtmlname).'.phtml';
+            $this->phtml = $this->getConfig('path/basedir').str_replace(_ , DS, str_replace('supa_', '',$phtmlname)).'.phtml';
+
         }
 
         if($this->isActive()) {

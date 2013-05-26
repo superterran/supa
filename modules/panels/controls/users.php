@@ -4,7 +4,6 @@ class supa_modules_panels_controls_users extends supa_control {
 
     public function indexAction()
     {
-//        var_dump($this->view('panels/users/login')->toHtml());
         $this->addLayout('content', $this->view('panels/users/login'));
     }
 
