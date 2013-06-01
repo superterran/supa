@@ -18,7 +18,7 @@ abstract class supa_widget extends supa_view {
     public function getWidgetContent() {
 
         $this::getPhtml();
-        echo parent::outputBuffer($this->_subblock);
+        return parent::outputBuffer($this->_subblock);
     }
 
 }
