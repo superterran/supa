@@ -126,4 +126,26 @@
 
     </observers>
 
+    <eav>
+        <supa_modules_panels_models_users>
+            <attributes>
+                <email>
+                    <kind>textfield</kind>
+                    <label>Email Address</label>
+                    <attribute>email</attribute>
+                </email>
+                <password>
+                    <kind>password</kind>
+                    <label>Password</label>
+                    <attribute>password</attribute>
+                </password>
+                <level>
+                    <kind>textfield</kind>
+                    <label>Privilages</label>
+                    <attribute>level</attribute>
+                </level>
+            </attributes>
+        </supa_modules_panels_models_users>
+    </eav>
+
 </module>

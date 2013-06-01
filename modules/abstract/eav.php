@@ -105,6 +105,14 @@ abstract class supa_eav extends supa_model
         return $this->sql(self::DELETE);
     }
 
+    public function updateData($eid, $data)
+    {
+        foreach($data as $attribute => $value) {
+
+            $this->updateSingleAttribute($eid, $attribute, $value);
+
+        }
+    }
 
     public function setData()
     {
@@ -139,6 +147,11 @@ abstract class supa_eav extends supa_model
     protected function addSingleAttribute($eid, $attribute, $value, $meta = 'false')
     {
         return $this->sql("insert into {{eav_table}} (eid, entity, attribute, value, meta) values('$eid', '{{eav_entity}}', '$attribute', '".addslashes($value)."', '".(string) $meta."');");
+    }
+
+    protected function updateSingleAttribute($eid, $attribute, $value)
+    {
+        return $this->sql("update {{eav_table}} set value = '".addslashes($value)."' where attribute = '$attribute' and eid = $eid");
     }
 
     public function sql($sql, $debug = false)
@@ -266,7 +279,7 @@ abstract class supa_eav extends supa_model
     }
 
 
-    public function getEntityLabel($entity = false)
+    public function getEntityLabel($entity = false, $labelonly = false)
     {
 
         if(!$entity) $entity = $this->getEntity();
@@ -278,7 +291,9 @@ abstract class supa_eav extends supa_model
 
             $stuff = $this->getModels($entitylabel);
             if($stuff) {
-                if(is_array($stuff)) return $stuff['class'];
+                if(is_array($stuff)) {
+                    if($labelonly) return false; else return $stuff['class'];
+                }
             }
 
             return $stuff;
@@ -310,7 +325,7 @@ abstract class supa_eav extends supa_model
      *
      * @return array
      */
-    protected function getAttributes()
+    public function getAttributes()
     {
         $data = array();
         $sql = $this->sql( $this->where() . " and meta = 'false' ");

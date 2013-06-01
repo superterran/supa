@@ -1,6 +1,14 @@
 <div class="post">
     <div class="heading"><?php if(is_string($this->getData('title'))):?><a href="<?php echo $this->getViewUrl() ?>"><?php echo $this->getData('title') ?></a><?php endif ?></div>
+
     <div class="commentcount"><?php if(is_string($this->getData('title'))):?><a class="blog-comment-count" href="#disqus_thread"></a><?php endif ?></div>
+    <?php if($this->model('panels/users')->isLoggedIn()): ?>
+        <a href="#" onclick="
+            supa.doAction('panels/eav/entities', false, $('panel_modal_container'));
+            supa.doAction('panels/eav/add', {'entity':'supa_modules_blog_models_posts', id: '<?php echo $this->getData('id') ?>'}, $('panelcontent'))
+            ">Edit</a>
+    <?php endif ?>
+
 
     <?php if(is_string($this->getData('byline'))): ?>
       By  <a class="byline" href="mailto: <?php if(is_string($this->getData('email'))) echo $this->getData('email'); ?>"><?php echo $this->getData('byline'); ?></a><br>

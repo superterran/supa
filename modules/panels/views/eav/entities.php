@@ -9,7 +9,7 @@ class supa_modules_panels_views_eav_entities extends supa_view {
 
     public function grabEntityLabel($entity)
     {
-        return $this->model('panels/eav')->getEntityLabel($entity);
+        return $this->model('panels/eav')->getEntityLabel($entity, true);
     }
 
 }

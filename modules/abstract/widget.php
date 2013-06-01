@@ -21,4 +21,12 @@ abstract class supa_widget extends supa_view {
         return parent::outputBuffer($this->_subblock);
     }
 
+    public function getSelectorClass()
+    {
+        $tmp = str_replace('supa_modules_', '', get_class($this));
+        $tmp = str_replace('_views_', '_', $tmp);
+        $tmp = str_replace('_', '-', $tmp);
+        return $tmp;
+    }
+
 }

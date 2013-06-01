@@ -1,5 +1,5 @@
 <ul>
     <?php foreach($this->getRecentPosts() as $post): ?>
-        <li><?php echo $post['title'] ?></li>
+        <li><a href="<?php echo $this->getViewUrl($post) ?>"><?php echo $post['title'] ?></a></li>
     <?php endforeach ?>
 </ul>

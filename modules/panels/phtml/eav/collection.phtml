@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <?php foreach($this->grabCollection() as $item): ?>
-            <tr>
+            <tr onclick="supa.doAction('panels/eav/add', {'entity':'<?php echo $this->getDo('entity') ?>', id: '<?php echo $item['id'] ?>'}, $('panelcontent'))">
                 <?php foreach($item as $att => $val): ?>
                     <td><span class="cell">
                     <?php if(isset($collection[$att]['kind'])): ?>

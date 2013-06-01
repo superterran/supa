@@ -107,7 +107,7 @@ h1,h2,h3,h4,h5,h6 {
     width: 100%;
     max-width: 650px;
     /*border: 1px solid white;*/
-    min-height: 700px;
+    min-height: 600px;
     float: left;
     margin: 10px;
     text-align: justify;
@@ -140,8 +140,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #right label {
-    font-weight: 100;
+    font-weight: 400;
     color: white;
+
 }
 
 #right #supa-avatar {
@@ -179,10 +180,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #footer {
-    clear: both;
+    display: block;
     width: 100%;
     max-width: 920px;
-    border-bottom: 1px solid lavender;
     margin: 10px;
     text-align: center;
     overflow-y: visible;
@@ -320,7 +320,7 @@ h1,h2,h3,h4,h5,h6 {
     text-align: center;
 }
 
-#box { margin-top: 40px }
+#box { margin-top: 10px }
 
 #content a { color: darkslategrey; }
 
@@ -328,3 +328,38 @@ h1,h2,h3,h4,h5,h6 {
 
     float: right;
 }
+
+.widget { margin-top: 40px  }
+.widget .heading { color: lavender;   }
+
+.cols, .cols2 {
+    display: block;
+    width: 218px;
+    /*border: 1px dashed red;*/
+    text-align: left;
+    float: left;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+#footer .cols2 {
+
+    width: 424px;
+
+}
+
+#footer .friends {
+
+    width: 130px;
+}
+
+#footer .whodat {
+
+    text-align: justify;
+    width: 512px;
+}
+
+ul.list { padding: 0px; margin: 0px;}
+ul.list li { list-style: none; margin: 0px; padding: 0px }
+
+.right { text-align: right }

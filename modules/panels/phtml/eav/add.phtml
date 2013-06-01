@@ -2,12 +2,22 @@
 <form id="entity_add" method="post" action="/panels/eav/add">
 <input type="hidden" name="entity" value="<?php echo $this->getDo('entity') ?>" />
 <?php $attributes = $this->grabAttributes() ?>
-<?php if($attributes): ?>
+    <?php if(is_string($this->getDo('id'))): ?>
+        <?php $data = $this->instantiate($this->getDo('entity'))->load($this->getDo('id')) ?>
+        <input type="hidden" name="eid" value="<?php echo $this->getDo('id') ?>" />
+    <?php endif ?>
+
+    <?php if($attributes): ?>
     <?php foreach($attributes as $attribute): ?>
+
+            <?php if(isset($data[$attribute['attribute']])) $attribute['value'] = $data[$attribute['attribute']] ?>
            <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'], $attribute); ?></div>
     <?php endforeach; ?>
+
     <div class="row options">
-        <a class="panel-button" href="#" onclick="supa.doForm($('entity_add'), $('panelcontent')); return false">Add</a>
+        <a class="panel-button" href="#" onclick="supa.doForm($('entity_add'), $('panelcontent')); return false">
+            <?php if(is_string($this->getDo('id'))): ?>Edit<?php else: ?>Add<?php endif ?>
+        </a>
     </div>
 <?php else: ?>
     <h2>Unable to comply: There are no attributes assigned to this entity.</h2>
