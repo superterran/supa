@@ -74,6 +74,13 @@
                 <phtml>view.phtml</phtml>
             </view>
 
+            <widget>
+                <recent>
+                    <class>supa_modules_blog_views_widget_recent</class>
+                    <phtml>widget/recent.phtml</phtml>
+                </recent>
+            </widget>
+
         </blog>
     </views>
 

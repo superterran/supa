@@ -42,6 +42,11 @@ abstract class supa_object {
                 return $this->getModule('layout')->getView($path);
             break;
 
+            case "widget": // Show a view object
+                echo $this->getModule('layout')->getView($path)->setData($value)->toHtml();
+                return;
+            break;
+
             case "html": // Show a view object
                 return $this->getModule('layout')->getChildHtml($path);
             break;
