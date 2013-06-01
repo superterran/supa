@@ -1,9 +1,11 @@
 <module>
 
     <meta>
-        <name>Blog</name>
-        <description>Blog module, you know... the whole point of this shit</description>
-        <active>true</active>
+        <blog>
+            <name>Blog</name>
+            <description>Blog module, you know... the whole point of this shit</description>
+            <active>true</active>
+        </blog>
     </meta>
 
     <controls>

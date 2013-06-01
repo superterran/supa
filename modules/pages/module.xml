@@ -1,9 +1,11 @@
 <module>
 
     <meta>
-        <name>Pages</name>
-        <description>An example module for the Supa framework</description>
-        <active>true</active>
+        <pages>
+            <name>Pages</name>
+            <description>An example module for the Supa framework</description>
+            <active>true</active>
+        </pages>
     </meta>
 
     <controls>

@@ -4,15 +4,14 @@ class supa_modules_blog_views_list extends supa_view {
 
     public function getPosts()
     {
-       // echo '<pre>';
+        $posts = false;
 
-        $data = $this->model('blog/posts')->getCollection();
-        foreach($data as $item)
+        foreach($this->model('blog/posts')->getCollection() as $item)
         {
-            $return = $this->view('blog/item')->setData($item)->toHtml();
+            $posts = $this->view('blog/item')->setData($item)->toHtml();
         }
 
-        return $return;
+        return $posts;
 
     }
 

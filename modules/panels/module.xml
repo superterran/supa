@@ -1,9 +1,11 @@
 <module>
 
     <meta>
-        <name>Panels</name>
-        <description>The views and stuff for the global 'panel' admin system</description>
-        <active>true</active>
+        <panels>
+            <name>Panels</name>
+            <description>The views and stuff for the global 'panel' admin system</description>
+            <active>true</active>
+        </panels>
     </meta>
 
     <controls>

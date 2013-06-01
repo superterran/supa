@@ -14,6 +14,8 @@ class supa_modules extends supa_object {
     {
 //        $this->getModule('observe')->event('supa_modules_loadModule_before');
 
+        $merged = array();
+
         foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
 
         foreach(glob($this->getConfig('path/modulesdir').'*') as $moduledir)
@@ -23,6 +25,9 @@ class supa_modules extends supa_object {
             elseif(is_dir($moduledir))
             {
                 $modulexml = simplexml_load_file($moduledir.DS.'module.xml');
+                $merged = array_merge_recursive(json_decode(json_encode($modulexml), true), $merged);
+                $this->addModule($moduledir, $modulexml[0]);
+
                 $this->setModule(basename($moduledir).'/path', $moduledir.DS); //sets a path variable in the module
                 foreach($modulexml as $module => $data) {
 
@@ -36,6 +41,9 @@ class supa_modules extends supa_object {
             }
         }
 
+        //var_dump($merged);
+
+        $this->addModules('mergedXml', $merged);
         $this->getObserve('supa_modules_loadModule_after');
 
     }

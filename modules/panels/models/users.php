@@ -3,7 +3,7 @@
  * Panel user model, user authentication
  * Class supa_modules_panels_models_users
  */
-class supa_modules_panels_models_users extends supa_model_eav {
+class supa_modules_panels_models_users extends supa_eav {
 
     /**
      * @todo this needs a stronger login check

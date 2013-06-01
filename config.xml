@@ -1,5 +1,11 @@
 <supa>
-    <appname>My Demo Site</appname>
+    <app>
+        <name>Demoland</name>
+        <author>Doug Hatcher</author>
+        <avatar>https://www.google.com/s2/photos/profile/107618603073236931621</avatar>
+        <email>superterran@gmail.com</email>
+    </app>
+
     <theme>default</theme>
     <responseCode>200</responseCode>
 

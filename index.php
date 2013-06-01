@@ -10,7 +10,7 @@ date_default_timezone_set('America/New_York');
 require_once('mediator.php');
 
 $site = new supa_mediator();
-$site->getModule('do')->action();
+$site->getModule('do')->action(); // Frontend AJAX API
 $site->getModule('front')->control();
 $site->getModule('response')->send();
 

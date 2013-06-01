@@ -17,7 +17,13 @@
             <?php foreach($this->grabCollection() as $item): ?>
             <tr>
                 <?php foreach($item as $att => $val): ?>
-                    <td><?php echo $val; ?></td>
+                    <td>
+                    <?php if(isset($collection[$att]['kind'])): ?>
+                        <?php echo $this->model('panels/kinds')->grab($collection[$att]['kind'], $val) ?></pre>
+                    <?php else: ?>
+                        <?php echo $val; ?>
+                    <?php endif ?>
+                    </td>
                 <?php endforeach ?>
                 <td><a href="#" onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $this->getDo('entity') ?>', 'perform': ['model','panels/eav','delete', '<?php echo $item['id'] ?>']}, $('panelcontent'))">Remove</a></td>
             </tr>

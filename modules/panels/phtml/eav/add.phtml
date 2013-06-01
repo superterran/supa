@@ -1,10 +1,10 @@
 <h2>Add <?php echo $this->grabEntityLabel(); ?></h2>
-<form>
+<form id="entity_add">
 
 <?php $attributes = $this->grabAttributes() ?>
 <?php if($attributes): ?>
     <?php foreach($attributes as $attribute): ?>
-           <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'])->setData($attribute)->toHtml(); ?></div>
+           <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'], $attribute); ?></div>
      <?php endforeach; ?>
 <?php else: ?>
     <h2>There are no attributes assigned to this entity.</h2>
@@ -12,9 +12,23 @@
 
 
     <div class="row">
-        <label>Attribute</label> <input type="text" name="attribute">
-    </div>
+<!--        <label>Attribute</label> <input type="text" name="attribute">-->
 
-    <button onclick="supa.doAction('addAttribute', $('form'), $('panel_modal_container')); return false;">Add</button>
+
+    <button onclick="
+        supa.doAction('panels/eav/collection',
+            {
+                'entity':'<?php echo $this->getDo('entity') ?>',
+                'perform': ['model','panels/eav','addData',
+                    function() {
+                        var data = [];
+                             $('entity_add').getElements().each(function(e){
+                                data[e.name] = e.value;
+                            })
+                        return data;
+                    }
+                ]
+            }
+        , $('panelcontent')); return false;">Add</button>
 
 </form>

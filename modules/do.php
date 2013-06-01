@@ -54,7 +54,12 @@ class supa_do extends supa_object {
 
             if(isset($do['do'])) {
                 $view = $do['do'];
-                $result = $this->view($view)->toHtml();
+//                if(method_exists($this->view($view), 'toHtml')) {
+                    $result = $this->view($view)->toHtml();
+//                } else {
+//                    $result = false;
+//                }
+
             }
 
             $this->getModule('session')->saveSession();

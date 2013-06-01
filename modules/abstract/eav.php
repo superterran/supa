@@ -4,7 +4,8 @@
  * No idea how to build this... doing it in old school mysql queries, going query-free next
  * Class supa_eav
  */
-abstract class supa_model_eav extends supa_model
+require_once('model.php');
+abstract class supa_eav extends supa_model
 {
     protected $_tap = false;
     protected $_eid = false;
@@ -117,6 +118,7 @@ abstract class supa_model_eav extends supa_model
     {
 
         $eid = $this->eidGetNew();
+        var_dump($data);
         foreach($data as $attribute => $value) $this->addSingleAttribute($eid, $attribute, $value, 'false');
         return $this->load($eid);
 
@@ -213,10 +215,10 @@ abstract class supa_model_eav extends supa_model
     }
 
     /**
-     * Returns list of EAV entities with labels from module xml
+     * Returns list of EAV entities with labels from eav table
      * @return array
      */
-    public function getEntities()
+    public function getStoredEntities()
     {
         $entities = $this->sql('select entity from {{eav_table}} group by entity desc');
 
@@ -231,16 +233,49 @@ abstract class supa_model_eav extends supa_model
         return $data;
     }
 
+    /**
+     * Returns list of EAV entities with labels from module xml
+     * @return array
+     */
+    public function getEntities()
+    {
+        $xml = $this->getModules('mergedXml');
+        $ent = array();
+        foreach($xml[0]['models'] as $key => $val) {
+            foreach($val as $node => $data)
+            if(isset($data['tap']) && $data['tap'] == 'eav') {
+                $ent[$data['class']] = $val;
+            }
+        }
+
+       // var_dump($ent);
+
+        return $ent;
+    }
+
+
     public function getEntityLabel($entity = false)
     {
 
         if(!$entity) $entity = $this->getEntity();
         $part = explode(_, $entity);
-         $stuff = $this->getModels($part[2].DS.$part[4].DS.'label');
 
-        if(is_array($stuff)) return $stuff['class'];
+        if(isset($part[4])) {
 
-        return $stuff;
+            $entitylabel = $part[2].DS.$part[4].DS.'label';
+
+            $stuff = $this->getModels($entitylabel);
+            if($stuff) {
+                if(is_array($stuff)) return $stuff['class'];
+            }
+
+            return $stuff;
+
+        } else {
+
+            return $entity;
+        }
+
     }
 
 

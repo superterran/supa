@@ -1,3 +1,8 @@
 <div id="blog">
-    <?php echo $this->getPosts(); ?>
+    <?php $posts = $this->getPosts(); ?>
+    <?php if($posts): ?>
+        <?php echo $posts; ?>
+    <?php else: ?>
+        <div id="blog_empty"><p>Nothing posted yet!</p></div>
+    <?php endif ?>
 </div>
