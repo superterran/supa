@@ -2,7 +2,7 @@
 <h3><?php echo $this->grabEntityLabel(); ?> Collection</h3>
 
 <?php $collection = $this->grabAttributes(false) ?>
-<?php if($collection): ?>
+<?php if($collection && $this->grabCollection()): ?>
     <table>
         <thead>
             <tr>

@@ -14,7 +14,7 @@
     <script src="<?php echo $this->getConfig('path/baseurl') ?>modules/panels/assets/wysihtml5/dist/wysihtml5-0.3.0.min.js"></script>
 
 </head>
-<body><?php echo $this->html('panels'); ?>
+<body class="<?php echo $this->getModule('front')->getLayoutHandle() ?>"><?php echo $this->html('panels'); ?>
 <div id="box" class="container">
     <div id="header">
         <ul class="navigation">
@@ -62,7 +62,7 @@
                 </li>
             </ul>
 
-            <?php $this->widget('blog/widget/recent'); ?>
+            <?php // $this->widget('blog/widget/recent'); ?>
 
         </div>
 
