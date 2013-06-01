@@ -1,0 +1,33 @@
+<module>
+
+    <meta>
+        <curtain>
+            <name>Curtain</name>
+            <description>A way to password protect staging enviroments and whutknots</description>
+            <active>true</active>
+        </curtain>
+    </meta>
+
+    <controls>
+        <curtain>
+            <index>supa_modules_curtain_controls_index</index>
+        </curtain>
+    </controls>
+
+    <!--<observers>-->
+        <!--<page_render_before>-->
+            <!--<order>0</order>-->
+            <!--<class>supa_modules_curtain_views_sitedisabled</class>-->
+            <!--<method>toHtml</method>-->
+        <!--</page_render_before>-->
+    <!--</observers>-->
+
+    <views>
+        <curtain>
+            <sitedisabled>
+                <class>supa_modules_curtain_views_sitedisabled</class>
+                <phtml>sitedisabled.phtml</phtml>
+            </sitedisabled>
+        </curtain>
+    </views>
+</module>

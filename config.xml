@@ -6,6 +6,7 @@
         <avatar>https://www.google.com/s2/photos/profile/107618603073236931621</avatar>
         <email>superterran@gmail.com</email>
         <debug>false</debug>
+        <password>drama</password>
     </app>
 
     <theme>default</theme>

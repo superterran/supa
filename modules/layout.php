@@ -6,9 +6,25 @@
  */
 class supa_layout extends supa_view {
 
+    public function curtainLogic()
+    {
+        $curtain = $this->view('curtain/sitedisabled');
+
+        if($this->getConfig('app/password') == $this->getDo('curtain')) $this->setSession('curtain', 'true');
+
+        if($curtain->isActive()) {
+            if($this->getSession('curtain') != 'true') {
+                echo $this->view('curtain/sitedisabled')->outputBuffer(); die();
+            }
+        }
+
+    }
 
     public function render()
     {
+
+        $this->curtainLogic();
+
         $themefile = $this->getConfig('path/appdir').'themes'.DS.$this->getConfig('theme').DS.'theme.phtml';
 
         // sets theme paths
