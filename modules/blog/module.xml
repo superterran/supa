@@ -14,18 +14,44 @@
         </blog>
     </controls>
 
+    <eav>
+        <supa_modules_blog_models_posts>
+            <attributes>
+                <byline>
+                    <kind>textfield</kind>
+                    <label>By</label>
+                    <attribute>byline</attribute>
+                </byline>
+                <title>
+                    <kind>textfield</kind>
+                    <label>Title</label>
+                    <attribute>title</attribute>
+                </title>
+                <email>
+                    <kind>textfield</kind>
+                    <label>Email</label>
+                    <attribute>email</attribute>
+                </email>
+                <body>
+                    <kind>richtext</kind>
+                    <label>Post Body</label>
+                    <attribute>body</attribute>
+                </body>
+                <slug>
+                    <kind>urlfriendly</kind>
+                    <label>URL Slug</label>
+                    <attribute>slug</attribute>
+                </slug>
+            </attributes>
+        </supa_modules_blog_models_posts>
+    </eav>
+
     <models>
         <blog>
             <posts>
                 <label>Blog Posts</label>
                 <class>supa_modules_blog_models_posts</class>
                 <tap>eav</tap>
-                <attributes>
-                    <byline>textfield</byline>
-                    <title>textfield</title>
-                    <email>textfield</email>
-                    <body>textfield</body>
-                </attributes>
             </posts>
         </blog>
     </models>

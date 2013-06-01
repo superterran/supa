@@ -65,6 +65,7 @@ supa = Class.create({
                             this.panelIdle = false;
                             Effect.SlideDown(doto);
                             this.panelIdle = true;
+
                             return;
                         }
                     }

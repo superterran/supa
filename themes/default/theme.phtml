@@ -9,6 +9,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js"></script>
     <script type="text/javascript" src="<?php echo $this->getConfig('path/themeurl'); ?>js/supa.js"></script>
 
+    <!-- stupid wysiwyg editor, need a better solution -->
+    <script src="<?php echo $this->getConfig('path/baseurl') ?>modules/panels/assets/wysihtml5/parser_rules/advanced.js"></script>
+    <script src="<?php echo $this->getConfig('path/baseurl') ?>modules/panels/assets/wysihtml5/dist/wysihtml5-0.3.0.min.js"></script>
+
 </head>
 <body><?php echo $this->html('panels'); ?>
 <div id="box" class="container">
@@ -72,12 +76,15 @@
 </div>
 
 <script type="text/javascript">
+
     var supa = new supa();
     <?php echo $this->html('supa.js_after') ?>
 
 
     //        supa.doAction('panels/eav/entities', false, $('panel_modal_container'));
     //        supa.doAction('panels/eav/add', {'entity':'supa_modules_panels_models_users'}, $('panelcontent'))
+
+
 
 </script>
 

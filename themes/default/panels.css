@@ -143,3 +143,16 @@ a#panel_close_button {
     padding-top: 20px;
     padding-bottom: 30px;
 }
+
+textarea.richtext {
+
+    width: 550px;
+    height: 400px;
+
+}
+
+.cell {
+
+    table-layout:fixed; overflow:hidden; white-space: nowrap;
+
+}

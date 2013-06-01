@@ -94,6 +94,11 @@
                     <class>supa_modules_panels_views_kinds_password</class>
                 </password>
 
+                <urlfriendly>
+                    <label>Url Friendly String</label>
+                    <class>supa_modules_panels_views_kinds_urlfriendly</class>
+                </urlfriendly>
+
 
             </kinds>
 

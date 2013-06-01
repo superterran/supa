@@ -1,0 +1,9 @@
+<?php if(is_string($this->getData())): ?>
+    <?php echo preg_replace('/[^a-zA-Z0-9]+/', '-', $str) ?>
+<?php elseif(is_array($this->getData())): ?>
+    <label><?php echo (string) $this->getData('label'); ?></label>
+    <input id="urlfriendly-<?php $this->getData('attribute') ?>" name="<?php echo $this->getData('attribute') ?>" value="<?php if(is_string($this->getData('value'))) echo $this->getData('value') ?>"
+
+        onkeypress="$('urlfriendly-<?php $this->getData('attribute') ?>').value = $('urlfriendly-<?php $this->getData('attribute') ?>').value.replace(/[^a-zA-Z0-9]+/,'');"
+        />
+<?php endif ?>

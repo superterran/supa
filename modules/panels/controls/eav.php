@@ -10,6 +10,7 @@ class supa_modules_panels_controls_eav extends supa_control {
             $payload = $_POST;
             unset($payload['entity']);
 
+//            var_dump($payload); die();
             $entity->addData($payload);
 
             $this->getModule('response')->setResponseBody($this->view('panels/eav/collection')->outputBuffer())->send(true);

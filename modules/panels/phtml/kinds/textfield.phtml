@@ -2,5 +2,5 @@
     <?php echo $this->getData() ?>
 <?php elseif(is_array($this->getData())): ?>
     <label><?php echo (string) $this->getData('label'); ?></label>
-    <input name="<?php echo (string) $this->getData('attribute') ?>" value="<?php if(is_string($this->getData('value'))) echo $this->getData('value') ?>" />
+    <input name="<?php echo $this->getData('attribute') ?>" value="<?php if(is_string($this->getData('value'))) echo $this->getData('value') ?>" />
 <?php endif ?>

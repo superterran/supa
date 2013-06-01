@@ -17,13 +17,13 @@
             <?php foreach($this->grabCollection() as $item): ?>
             <tr>
                 <?php foreach($item as $att => $val): ?>
-                    <td>
+                    <td><span class="cell">
                     <?php if(isset($collection[$att]['kind'])): ?>
-                        <?php echo $this->model('panels/kinds')->grab($collection[$att]['kind'], $val) ?></pre>
+                        <?php echo substr(strip_tags($this->model('panels/kinds')->grab($collection[$att]['kind'], $val)), 0, 50) ?>
                     <?php else: ?>
-                        <?php echo $val; ?>
+                        <?php echo strip_tags($val); ?>
                     <?php endif ?>
-                    </td>
+                    </span></td>
                 <?php endforeach ?>
                 <td><a href="#" onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $this->getDo('entity') ?>', 'perform': ['model','panels/eav','delete', '<?php echo $item['id'] ?>']}, $('panelcontent'))">Remove</a></td>
             </tr>

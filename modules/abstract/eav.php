@@ -12,6 +12,7 @@ abstract class supa_eav extends supa_model
 
     const SELECT = "select * from {{eav_table}} ";
     const WHERE = " where entity = '{{eav_entity}}' ";
+    const ORDER = " order by {{order_attribute}} {{order_sort}} ";
 
     const LIMIT = "limit {{limit}}";
 
@@ -60,6 +61,7 @@ abstract class supa_eav extends supa_model
 
         $this->select();
         $this->where();
+        $this->order();
 
         $col = $this->sql($this->_sql);
 
@@ -92,7 +94,7 @@ abstract class supa_eav extends supa_model
         $entity = $this->sql($this->where());
 
         $_tmp['id'] = $eid;
-        foreach($entity as $attr) $_tmp[$attr['attribute']] = $attr['value'];
+        foreach($entity as $attr) $_tmp[$attr['attribute']] = stripslashes($attr['value']);
 
         return $_tmp;
     }
@@ -136,7 +138,7 @@ abstract class supa_eav extends supa_model
 
     protected function addSingleAttribute($eid, $attribute, $value, $meta = 'false')
     {
-        return $this->sql("insert into {{eav_table}} (eid, entity, attribute, value, meta) values('$eid', '{{eav_entity}}', '$attribute', '$value', '".(string) $meta."');");
+        return $this->sql("insert into {{eav_table}} (eid, entity, attribute, value, meta) values('$eid', '{{eav_entity}}', '$attribute', '".addslashes($value)."', '".(string) $meta."');");
     }
 
     public function sql($sql, $debug = false)
@@ -146,7 +148,9 @@ abstract class supa_eav extends supa_model
             '{{eav_entity}}'=>$this->getEntity(),
             '{{eid}}'=>$this->getEid(),
 
-            '{{limit}}'=> '100'
+            '{{limit}}'=> '100',
+            '{{order_sort}}'=>'desc',
+            '{{order_attribute}}'=>'eid'
         );
 
         foreach($list as $needle => $replace) $sql = str_replace($needle, $replace, $sql);
@@ -181,6 +185,14 @@ abstract class supa_eav extends supa_model
         $this->_filter .= " and attribute = '$attr' and value $cond  '$val' ";
         $this->where();
         $this->sql($this->_sql);
+        return $this;
+
+    }
+
+    public function order()
+    {
+
+        $this->_sql = $this->_sql.self::ORDER;
         return $this;
 
     }
@@ -327,6 +339,24 @@ abstract class supa_eav extends supa_model
             if(!isset($attrib['kind'])) $attrib['kind'] = 'textfield';
             $data[$attrib['attribute']] = $attrib;
 
+        }
+
+$data = false; // @todo merge above functionality with default from module.xml below. This forces load from module, which is good for now
+
+        /**
+         * If no attributes are found in database, load defaults from module xml
+         */
+        if(!$data) {
+            foreach($this->getModules('mergedXml') as $part) {
+
+                if(isset($part['eav'])) {
+
+                    if(isset($part['eav'][$this->getEntity()])) {
+                        $data = $part['eav'][$this->getEntity()]['attributes'];
+
+                    }
+                }
+            }
         }
 
         return $data;
