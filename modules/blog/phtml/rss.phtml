@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+
+        <title><?php echo $this->getConfig('app/name') ?></title>
+        <description><?php echo $this->getConfig('app/description') ?></description>
+        <link><?php $this->getConfig('path/baseurl') ?>blog/</link>
+        <?php /*
+        <lastBuildDate>Mon, 06 Sep 2010 00:01:00 +0000 </lastBuildDate>
+        <pubDate>Mon, 06 Sep 2009 16:45:00 +0000 </pubDate>
+        */ ?><ttl>1800</ttl>
+        <?php // getting lazy ?>
+        <?php $collection = $this->model('blog/posts')->getCollection() ?>
+        <?php foreach($collection as $item): ?>
+
+        <item>
+
+            <title><?php echo $item['title'] ?></title>
+            <description><?php echo $item['body'] ?></description>
+           <?php /* <link><?php echo $item->getUrl() ?>/</link>
+            <guid>unique string per item</guid>
+            <pubDate>Mon, 06 Sep 2009 16:45:00 +0000 </pubDate> */ ?>
+
+        </item>
+        <?php endforeach ?>
+
+    </channel>
+</rss>

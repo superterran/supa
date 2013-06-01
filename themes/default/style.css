@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100);
 body {
 
-    background-color: lightslategray;
+    background-color: royalblue;
     /*background-color: darkslategray;*/
     color: lavender;
     font-family: 'Roboto', sans-serif;
@@ -321,7 +321,7 @@ h1,h2,h3,h4,h5,h6 {
     text-align: center;
 }
 
-#box { margin-top: 10px }
+#box { margin-top: 60px }
 
 #content a { color: darkslategrey; }
 

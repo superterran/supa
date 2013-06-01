@@ -1,11 +1,11 @@
 #panel {
 
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(50,50,50,.9);
     color: aliceblue;
     display: block;
     overflow: auto;
     font-size: 20px;
-    position: relative;
+    position: fixed;
     top: 0px;
     left:0px;
     right:0px;

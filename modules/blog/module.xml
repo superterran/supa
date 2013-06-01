@@ -12,6 +12,7 @@
         <blog>
             <index>supa_modules_blog_controls_index</index>
             <view>supa_modules_blog_controls_view</view>
+            <rss>supa_modules_blog_controls_rss</rss>
         </blog>
     </controls>
 
@@ -80,6 +81,11 @@
                     <phtml>widget/recent.phtml</phtml>
                 </recent>
             </widget>
+
+            <rss>
+                <class>supa_modules_blog_views_rss</class>
+                <phtml>rss.phtml</phtml>
+            </rss>
 
         </blog>
     </views>

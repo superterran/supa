@@ -13,6 +13,10 @@
     <script src="<?php echo $this->getConfig('path/baseurl') ?>modules/panels/assets/wysihtml5/parser_rules/advanced.js"></script>
     <script src="<?php echo $this->getConfig('path/baseurl') ?>modules/panels/assets/wysihtml5/dist/wysihtml5-0.3.0.min.js"></script>
 
+    <!-- RSS feed -->
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $this->getConfig('path/baseurl'); ?>blog/rss/list/" />
+
 </head>
 <body class="<?php echo $this->getModule('front')->getLayoutHandle() ?>"><?php echo $this->html('panels'); ?>
 <div id="box" class="container">
@@ -86,8 +90,8 @@
         </div>
         <div class="cols">
             <h2>Points of Interest</h2>
-            Github some other place
-                <br><br>
+            <a style="color: darkorange" href="<?php echo $this->getConfig('path/baseurl') ?>blog/rss/list/">RSS</a> &nbsp;
+            <a href = "http://github.com/superterran/">Github</a>  <br><br>
             <h2>Props</h2>
             Built with the <a href="https://github.com/superterran/supa" target="new">Supa Framework</a>
         </div>
