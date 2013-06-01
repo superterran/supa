@@ -118,7 +118,7 @@ abstract class supa_eav extends supa_model
     {
 
         $eid = $this->eidGetNew();
-        var_dump($data);
+//        var_dump($data);
         foreach($data as $attribute => $value) $this->addSingleAttribute($eid, $attribute, $value, 'false');
         return $this->load($eid);
 

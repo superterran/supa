@@ -12,6 +12,18 @@ supa = Class.create({
 
     },
 
+    doForm: function(form, doto) {
+
+        form.request({
+
+            onSuccess: function(t) {
+                doto.innerHTML = t.responseText
+                return;
+            }
+
+        })
+    },
+
     doAction: function(todo, params, doto) {
 
         console.log(todo, params);

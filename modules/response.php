@@ -35,10 +35,11 @@ class supa_response extends supa_object {
         return false;
     }
 
-    public function send()
+    public function send($dieAfter = false)
     {
-        $this->observe('page_render_before');
+        if(!$dieAfter) $this->observe('page_render_before');
         $this->sendResponse();
+        if($dieAfter) die();
         $this->observe('page_render_after');
     }
 
@@ -60,7 +61,8 @@ class supa_response extends supa_object {
 
     public function setResponseBody($body)
     {
-        return $this->_responseBody .= $body;
+        $this->_responseBody .= $body;
+        return $this;
     }
 
     public function getResponseCode()

@@ -4,7 +4,8 @@
     <?php if($entities): ?>
         <?php foreach($this->getEntities() as $entity => $data): ?>
             <li onclick="supa.doAction('panels/eav/collection', {'entity':'<?php echo $entity ?>'}, $('panelcontent'))">
-                <?php if(isset($data[0]['label'])) echo $data[0]['label']; else echo $entity ?>
+<!--                --><?php //var_dump($data['label']) ?>
+                <?php echo $this->grabEntityLabel($entity) ?>
             </li>
         <?php endforeach ?>
     <?php else: ?>

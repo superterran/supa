@@ -1,6 +1,6 @@
 <h2>Add <?php echo $this->grabEntityLabel(); ?></h2>
-<form id="entity_add">
-
+<form id="entity_add" method="post" action="/panels/eav/add">
+<input type="hidden" name="entity" value="<?php echo $this->getDo('entity') ?>" />
 <?php $attributes = $this->grabAttributes() ?>
 <?php if($attributes): ?>
     <?php foreach($attributes as $attribute): ?>
@@ -15,20 +15,6 @@
 <!--        <label>Attribute</label> <input type="text" name="attribute">-->
 
 
-    <button onclick="
-        supa.doAction('panels/eav/collection',
-            {
-                'entity':'<?php echo $this->getDo('entity') ?>',
-                'perform': ['model','panels/eav','addData',
-                    function() {
-                        var data = [];
-                             $('entity_add').getElements().each(function(e){
-                                data[e.name] = e.value;
-                            })
-                        return data;
-                    }
-                ]
-            }
-        , $('panelcontent')); return false;">Add</button>
+    <a href="#" onclick="supa.doForm($('entity_add'), $('panelcontent')); return false">Add</a>
 
 </form>

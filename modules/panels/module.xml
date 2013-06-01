@@ -11,6 +11,7 @@
     <controls>
         <panels>
             <users>supa_modules_panels_controls_users</users>
+            <eav>supa_modules_panels_controls_eav</eav>
         </panels>
     </controls>
 
