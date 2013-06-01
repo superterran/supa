@@ -107,7 +107,7 @@ width: 100%; border: 1px solid green;
 }
 
 #panel-sensor {
-    border-bottom: 1px dashed lightblue;
+    /*border-bottom: 1px dashed lightblue;*/
     padding-bottom: 100px;
     position: absolute;
     left: 0px;
@@ -156,3 +156,18 @@ textarea.richtext {
     table-layout:fixed; overflow:hidden; white-space: nowrap;
 
 }
+
+#panel div.panel_content .row input {
+
+    border: 1px solid lavender;
+    padding: 4px;
+    background-color: rgba(255,255,255,.1);
+    color: lavender;
+    margin-top: 6px;
+    width: 550px;
+}
+
+
+
+.panel-button { float: right; }
+.row.options { width: 830px; }

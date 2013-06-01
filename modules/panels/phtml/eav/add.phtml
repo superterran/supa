@@ -6,7 +6,9 @@
     <?php foreach($attributes as $attribute): ?>
            <div class="row"><?php echo $this->model('panels/kinds')->grab($attribute['kind'], $attribute); ?></div>
     <?php endforeach; ?>
-    <a href="#" onclick="supa.doForm($('entity_add'), $('panelcontent')); return false">Add</a>
+    <div class="row options">
+        <a class="panel-button" href="#" onclick="supa.doForm($('entity_add'), $('panelcontent')); return false">Add</a>
+    </div>
 <?php else: ?>
     <h2>Unable to comply: There are no attributes assigned to this entity.</h2>
 <?php endif; ?>

@@ -20,7 +20,7 @@ class supa_modules_pages_controls_index extends supa_control {
             $this->setLayout('content', $this->getModule('layout')->outputBuffer($file));
         } else {
 
-            $this->setLayout('content', $this->getModule('layout')->outputBuffer($this->getConfig('path/basedir').'pages/404.phtml'));
+            $this->setLayout('content', $this->getModule('layout')->outputBuffer($this->getConfig('path/basedir').'pages/error.phtml'));
 
         }
 

@@ -9,6 +9,7 @@ class supa_modules_panels_controls_eav extends supa_control {
             $entity = $this->instantiate($_POST['entity']);
             $payload = $_POST;
             unset($payload['entity']);
+            unset($payload['_wysihtml5_mode']);
 
 //            var_dump($payload); die();
             $entity->addData($payload);
