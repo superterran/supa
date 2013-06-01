@@ -136,8 +136,7 @@ abstract class supa_eav extends supa_model
 
     public function eidGetNew()
     {
-        $result = $this->sql("select eid from {{eav_table}} order by eid desc limit 1");
-
+        $result = (array) $this->sql("select eid from {{eav_table}} order by eid desc limit 1");
         if(isset($result[0]['eid'])) $lasteid = (int) $result[0]['eid']; else $lasteid = 0;
         $lasteid++;
         return $lasteid;
