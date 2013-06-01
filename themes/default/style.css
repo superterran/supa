@@ -201,7 +201,7 @@ h1,h2,h3,h4,h5,h6 {
 
 }
 .post .header {
-    font-size: 25px;
+    font-size: 28px;
     display: block;
     /*background-color: cadetblue;*/
 
@@ -210,8 +210,13 @@ h1,h2,h3,h4,h5,h6 {
 
     /*color: darkslategray;*/
 
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin-top: 5px;
+    border-top: 1px solid lavender;
 
 }
+
 
 #supa-debug {
 
@@ -317,4 +322,9 @@ h1,h2,h3,h4,h5,h6 {
 
 #box { margin-top: 40px }
 
-#content a { color: deepskyblue; }
+#content a { color: darkslategrey; }
+
+.blog-comment-count {
+
+    float: right;
+}

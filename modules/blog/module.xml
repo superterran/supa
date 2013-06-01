@@ -11,6 +11,7 @@
     <controls>
         <blog>
             <index>supa_modules_blog_controls_index</index>
+            <view>supa_modules_blog_controls_view</view>
         </blog>
     </controls>
 
@@ -67,6 +68,11 @@
                 <class>supa_modules_blog_views_item</class>
                 <phtml>item.phtml</phtml>
             </item>
+
+            <view>
+                <class>supa_modules_blog_views_view</class>
+                <phtml>view.phtml</phtml>
+            </view>
 
         </blog>
     </views>

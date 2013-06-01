@@ -66,4 +66,16 @@ class supa_front extends supa_object {
         return $_handle = explode(DS, substr($_SERVER['REDIRECT_URL'], 1));
     }
 
+    public function getParamsFromUrl()
+    {
+        $_url = explode(DS, substr($_SERVER['REDIRECT_URL'], 1));
+
+//        unset($_url[0]);
+//        unset($_url[1]);
+//        unset($_url[2]);
+
+       return $_url[3];
+
+    }
+
 }
