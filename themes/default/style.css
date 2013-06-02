@@ -107,7 +107,7 @@ h1,h2,h3,h4,h5,h6 {
     width: 100%;
     max-width: 650px;
     /*border: 1px solid white;*/
-    min-height: 350px;
+    min-height: 550px;
     /*height: 570px;*/
     float: left;
     margin: 10px;
@@ -321,7 +321,7 @@ h1,h2,h3,h4,h5,h6 {
     text-align: center;
 }
 
-#box { margin-top: 60px }
+#box { margin-top: 40px }
 
 #content a { color: darkslategrey; }
 
