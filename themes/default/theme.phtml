@@ -18,7 +18,7 @@
     <link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $this->getConfig('path/baseurl'); ?>blog/rss/list/" />
 
 </head>
-<body class="<?php echo $this->getModule('front')->getLayoutHandle() ?>"><?php echo $this->html('panels'); ?>
+<body class="<?php //echo $this->getModule('front')->getLayoutHandle() ?>"><?php echo $this->html('panels'); ?>
 <div id="box" class="container">
     <div id="header">
         <ul class="navigation">
@@ -56,15 +56,7 @@
                 </div>
             </div>
 
-            <ul>
-                <li><label>Lives in</label> Charleston, SC</li>
-                <li><label>From</label> Myrtle Beach, SC</li>
-                <li><label>Works at</label> <a href="http://www.blueacorn.com/" target="new">Blue Acorn</a></li>
-                <li><label>Hangs out on</label> <a href="https://plus.google.com/107618603073236931621/posts/p/pub">Google
-                        Plus</a>
-                    and <a href="http://www.reddit.com/user/superterran/">Reddit</a>
-                </li>
-            </ul>
+            <?php echo $this->model('pages/page')->loadBySlug('deets')['body']; ?>
 
             <?php  $this->widget('blog/widget/recent'); ?>
 
@@ -75,7 +67,7 @@
     <div id="footer" class="container">
         <div class="cols2 whodat">
             <h2>Who is this guy?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet vulputate ipsum. Suspendisse eu elit nec lacus consectetur cursus sit amet sed velit. Donec imperdiet tincidunt luctus. </p>
+            <?php echo $this->model('pages/page')->loadBySlug('whodat')['body']; ?>
         </div>
         <div class="cols right friends">
             <h2>Friends</h2>
@@ -107,16 +99,10 @@
 
 
 <script type="text/javascript">
-
     var supa = new supa();
     <?php echo $this->html('supa.js_after') ?>
-
-
     //        supa.doAction('panels/eav/entities', false, $('panel_modal_container'));
     //        supa.doAction('panels/eav/add', {'entity':'supa_modules_panels_models_users'}, $('panelcontent'))
-
-
-
 </script>
 
 </body>

@@ -10,6 +10,7 @@ body {
   font-weight: 300;
   margin: 0;
   background-image: url('../img/noise.png');
+  font-size: 15px;
 }
 body a {
   color: #d1f0ff;
@@ -123,6 +124,7 @@ ul.navigation li a {
   padding: 15px;
   margin-right: 0px;
   color: #333;
+  border-radius: 5px;
 }
 #content p {
   color: #333333;
@@ -148,13 +150,9 @@ ul.navigation li a {
   margin: 10px;
   color: #ffffff;
 }
-#right a {
-  color: #ffffb2;
-}
 #right ul {
   margin: 0;
   padding: 0;
-  margin-top: 10px;
 }
 #right ul li {
   padding-left: 0;
@@ -170,14 +168,15 @@ ul.navigation li a {
 }
 #right .heading {
   color: #f5f5dc;
+  font-size: 24px;
 }
 #right #supa-avatar {
   max-width: 100%;
+  border-radius: 5px;
 }
 #right .avatar-wrapper {
   display: block;
   position: relative;
-  background-color: #f5f5dc;
 }
 #right .avatar-info {
   display: block;
@@ -188,7 +187,9 @@ ul.navigation li a {
   background-color: rgba(0, 0, 0, 0.7);
   font-size: 30px;
   font-weight: 100;
-  border-top: 1px solid black;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-left: 5px;
 }
 .post .header {
   font-size: 28px;
@@ -246,6 +247,7 @@ ul.navigation li a {
   background-color: rgba(150, 150, 150, 0.2);
   color: #ffffb2;
   overflow: auto;
+  border-radius: 5px;
 }
 #messages {
   display: block;
@@ -301,8 +303,7 @@ ul.navigation li a {
 #footer {
   display: block;
   width: 100%;
-  max-width: 920px;
-  margin: 10px;
+  max-width: 970px;
   text-align: center;
   overflow-y: visible;
   height: 12px;
@@ -316,7 +317,7 @@ ul.navigation li a {
 }
 #footer .whodat {
   text-align: justify;
-  width: 512px;
+  width: 525px;
 }
 #footer .text {
   background-color: #778899;

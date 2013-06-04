@@ -29,6 +29,7 @@ body {
   font-weight: 300;
   margin: 0;
   background-image: url('../img/noise.png');
+  font-size: 15px;
 
   a {
     color: @bglink;
@@ -136,6 +137,7 @@ ul.navigation  {
   padding: 15px;
   margin-right: 0px;
   color: #333;
+  border-radius: 5px;
 
   p { color: @fgfont1 }
 
@@ -161,12 +163,10 @@ ul.navigation  {
   margin: 10px;
   color: @bgfont1;
 
-  a { color: @bgfont4 }
-
   ul {
     margin: 0;
     padding: 0;
-    margin-top: 10px;
+
 
     li {
       padding-left: 0;
@@ -190,11 +190,13 @@ ul.navigation  {
   .heading {
 
     color: @bgfont3;
+    font-size: 24px;
   }
 
   #supa-avatar {
 
     max-width: 100%;
+    border-radius: 5px;
   }
 
 
@@ -202,7 +204,7 @@ ul.navigation  {
 
     display: block;
     position: relative;
-    background-color: @bgfont3;
+
 
   }
 
@@ -216,7 +218,10 @@ ul.navigation  {
     background-color: rgba(0,0,0,.7);
     font-size: 30px;
     font-weight: 100;
-    border-top: 1px solid black;
+//    border-top: 1px solid black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-left: 5px;
 
   }
 }
@@ -288,6 +293,7 @@ ul.navigation  {
   background-color: rgba(150, 150, 150, 0.2);
   color: @bgfont2;
   overflow: auto;
+  border-radius: 5px;
 }
 
 #messages {
@@ -353,8 +359,8 @@ ul.navigation  {
 
   display: block;
   width: 100%;
-  max-width: 920px;
-  margin: 10px;
+  max-width: 970px;
+
   text-align: center;
   overflow-y: visible;
   height: 12px;
@@ -370,7 +376,7 @@ ul.navigation  {
 
   .whodat {
     text-align: justify;
-    width: 512px;
+    width: 525px;
   }
 
   .text {
