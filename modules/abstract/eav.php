@@ -86,6 +86,13 @@ abstract class supa_eav extends supa_model
         }
     }
 
+    public function loadBySlug($slug)
+    {
+        $entity = $this->sql($this->where()." and attribute = 'slug' and value = '".$this->clean($slug)."'");
+        return $this->load($entity[0]['eid']);
+
+    }
+
     public function load($eid)
     {
         $this->_eid = $eid;
@@ -401,5 +408,10 @@ $data = false; // @todo merge above functionality with default from module.xml b
         return $this->_eid;
     }
 
+    public function clean($sql) {
+
+        return addslashes($sql);
+
+    }
 
 }

@@ -18,7 +18,7 @@
     <models>
         <panels>
             <users>
-                <label>Panel Users</label>
+                <label>Users</label>
                 <class>supa_modules_panels_models_users</class>
                 <tap>eav</tap>
             </users>

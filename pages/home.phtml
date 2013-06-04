@@ -1,4 +1,5 @@
 <style type="text/css">
    div#right { display: none }
-   div#content { max-width: 910px; background-color: transparent; height: 570px;}
+   div#content { max-width: 910px; background-color: transparent; height: 570px; color: lavender }
 </style>
+<?php echo $this->model('pages/page')->loadBySlug('home')['body']; ?>

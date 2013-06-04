@@ -11,7 +11,49 @@
     <controls>
         <pages>
             <index>supa_modules_pages_controls_index</index>
+            <view>supa_modules_pages_controls_view</view>
         </pages>
     </controls>
+
+    <models>
+        <pages>
+            <page>
+                <label>Pages</label>
+                <class>supa_modules_pages_models_page</class>
+                <tap>eav</tap>
+            </page>
+        </pages>
+    </models>
+
+    <views>
+        <pages>
+            <page>
+                <class>supa_modules_pages_views_page</class>
+                <phtml>page.phtml</phtml>
+            </page>
+        </pages>
+    </views>
+
+    <eav>
+        <supa_modules_pages_models_page>
+            <attributes>
+                <title>
+                    <kind>textfield</kind>
+                    <label>title</label>
+                    <attribute>name</attribute>
+                </title>
+                <body>
+                    <kind>richtext</kind>
+                    <label>Post Body</label>
+                    <attribute>body</attribute>
+                </body>
+                <slug>
+                    <kind>urlfriendly</kind>
+                    <label>URL Slug</label>
+                    <attribute>slug</attribute>
+                </slug>
+            </attributes>
+        </supa_modules_pages_models_page>
+    </eav>
 
 </module>

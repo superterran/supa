@@ -51,7 +51,7 @@
     <models>
         <blog>
             <posts>
-                <label>Blog Posts</label>
+                <label>Posts</label>
                 <class>supa_modules_blog_models_posts</class>
                 <tap>eav</tap>
             </posts>
