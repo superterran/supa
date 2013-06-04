@@ -124,6 +124,9 @@ ul.navigation li a {
   margin-right: 0px;
   color: #333;
 }
+#content p {
+  color: #003d66;
+}
 #content a {
   color: #0000ff;
 }
