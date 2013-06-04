@@ -93,7 +93,7 @@ ul.navigation li a {
 }
 .heading {
   font-size: 32px;
-  color: #003d66;
+  color: #333333;
   font-weight: 200;
 }
 .container {
@@ -125,7 +125,7 @@ ul.navigation li a {
   color: #333;
 }
 #content p {
-  color: #003d66;
+  color: #333333;
 }
 #content a {
   color: #0000ff;
