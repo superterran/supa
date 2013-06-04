@@ -171,3 +171,6 @@ textarea.richtext {
 
 .panel-button { float: right; }
 .row.options { width: 830px; }
+
+#panel table th { cursor: default }
+#panel table td { cursor: pointer }
