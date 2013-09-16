@@ -15,7 +15,11 @@ class supa_modules_panels_controls_users extends supa_control {
     public function attemptRegisterAction()
     {
         // for the time being, assume all new users should be added indiscrimately...
+	if($this->getConfig('app/attemptregister') != 'true') {
 
+		die('Registration Locked. Try again in the future.');
+		return false;
+	}	
         $creds = $this->getDo();
         $errors = array();
 
