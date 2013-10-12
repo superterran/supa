@@ -4,7 +4,7 @@
         <curtain>
             <name>Curtain</name>
             <description>A way to password protect staging enviroments and whutknots</description>
-            <active>true</active>
+            <active>false</active>
         </curtain>
     </meta>
 

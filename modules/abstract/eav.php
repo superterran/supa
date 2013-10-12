@@ -89,8 +89,11 @@ abstract class supa_eav extends supa_model
     public function loadBySlug($slug)
     {
         $entity = $this->sql($this->where()." and attribute = 'slug' and value = '".$this->clean($slug)."'");
-        return $this->load($entity[0]['eid']);
-
+        if($entity->fetch_assoc()) {
+            //if($entity) return false;
+            return $this->load($entity[0]['eid']);
+        }
+        return false;
     }
 
     public function load($eid)
@@ -181,7 +184,7 @@ abstract class supa_eav extends supa_model
 
        }
         $result = $this->_tap->query($sql);
-        if(!$result && !$this->sql_hide_error) echo ('<span style="color:red">error:</span> '.mysql_error().'<br>'.$sql);
+        if(!$result && !$this->sql_hide_error) echo ('<span style="color:red">error:</span> '.$this->_tap->error.'<br>'.$sql);
 
         if(!is_bool($result))
         {
