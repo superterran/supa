@@ -234,4 +234,8 @@ abstract class supa_object {
         return $url;
     }
 
+    public function log($msg) {
+        echo $msg;
+    }
+
 }

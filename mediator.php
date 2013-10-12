@@ -65,10 +65,16 @@ class supa_mediator extends supa_object {
      */
     public function loadConfigXml()
     {
-        $current_config = $this->getConfig();
-        $xml = simplexml_load_file($this->getConfig('path/configxml'));
-        $new_config = json_decode(json_encode($xml), true);
-        $this->setConfig(array_merge_recursive($new_config, $current_config));
+        if(file_exists($this->getConfig('path/configxml'))) {
+            $current_config = $this->getConfig();
+            $xml = simplexml_load_file($this->getConfig('path/configxml'));
+            $new_config = json_decode(json_encode($xml), true);
+            $this->setConfig(array_merge_recursive($new_config, $current_config));
+            return $this;
+        } else  {
+            $this->log("Couldn't load configuration, config.xml does not exist."); exit();
+        }
+
         return $this;
     }
 
