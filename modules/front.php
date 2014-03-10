@@ -31,7 +31,11 @@ class supa_front extends supa_object {
 
     public function getLayoutHandle($handle = 'fromUrl')
     {
-        $_default = explode(_, $this->getConfig('controls/default/index'));
+        if(!is_string($this->getConfig('controls/default/index'))) {
+            $_default = explode(_, 'install_index_index');
+        } else {
+            $_default = explode(_, $this->getConfig('controls/default/index'));
+        }
 
         if($handle == 'fromUrl') {
             if(isset($_SERVER['REDIRECT_URL'])) {

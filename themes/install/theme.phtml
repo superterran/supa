@@ -1,0 +1,43 @@
+<?php $install_data = $this->getConfig('install_data') ?>
+<!doctype>
+<html>
+    <head>
+        <title><?php echo $install_data['app']['appname']; ?> Installer</title>
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getConfig('path/themeurl'); ?>css/default.css">
+    </head>
+    <body>
+    <div id="container">
+        <div id="header"><?php echo $install_data['app']['appname']; ?></div>
+        <?php if(is_string($this->getConfig('install_error'))): ?>
+        <ul id="error"><li><?php echo $this->getConfig('install_error') ?></li></ul>
+        <?php endif ?>
+
+        <div id="content">
+            <?php foreach($this->getLayout('install') as $key => $part): ?>
+                <div id="part<?php echo $key ?>">
+                    <?php echo $part ?>
+                </div>
+            <?php endforeach?>
+
+            <form method="post" action=".">
+            <?php unset($install_data['app']['appname']) ?>
+            <?php foreach($install_data as $key => $data): ?>
+                <h2><?php echo $key ?></h2>
+                <?php foreach($data as $name => $default): ?>
+                    <div class="item">
+                        <label><?php echo ucfirst($name) ?></label>
+                        <input type="text" name="<?php echo $key._.$name ?>" value="<?php echo $default ?>" />
+                    </div>
+                <?php endforeach ?>
+            <?php endforeach ?>
+                <center>
+                    <input type="hidden" name="startinstall" value="true" />
+                    <button id="complete" type="submit">Accept License and Complete Installation</button>
+                </center>
+            </form>
+        </div>
+        <div id="footer">Based on The Supa Framework, 2014</div>
+    </div>
+    </body>
+
+</html>

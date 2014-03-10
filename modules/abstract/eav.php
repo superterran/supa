@@ -10,13 +10,13 @@ abstract class supa_eav extends supa_model
     protected $_tap = false;
     protected $_eid = false;
 
-    const SELECT = "select * from {{eav_table}} ";
+    const SELECT = "select * from {{eavtable}} ";
     const WHERE = " where entity = '{{eav_entity}}' ";
     const ORDER = " order by {{order_attribute}} {{order_sort}} ";
 
     const LIMIT = "limit {{limit}}";
 
-    const DELETE = "delete from {{eav_table}} where eid = {{eid}}";
+    const DELETE = "delete from {{eavtable}} where eid = {{eid}}";
 
     protected $_select = false;
     protected $_where = false;
@@ -34,16 +34,20 @@ abstract class supa_eav extends supa_model
     public function __construct()
     {
         $creds = $this->getConfig('mysql');
+        if(!isset($creds['host'])) return false;
         if(empty($creds['pass'])) $pass=false; else $pass = $creds['pass'];
         $this->_tap = new mysqli($creds['host'], $creds['user'], $pass, $creds['database']);
-        $result = $this->sql("describe {{eav_table}};");
+        if($this->_tap->connect_error) {
+            $this->log('Could not connect to database: '.$this->_tap->connect_error); die();
+        }
+        $result = $this->sql("describe {{eavtable}};");
         if(!$result) $this->createTable();
     }
 
     public function createTable()
     {
         $this->sql("
-              CREATE TABLE if not exists `{{eav_table}}` (
+              CREATE TABLE if not exists `{{eavtable}}` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `eid` int(11) DEFAULT NULL,
                 `entity` varchar(45) DEFAULT NULL,
@@ -53,7 +57,6 @@ abstract class supa_eav extends supa_model
                 PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=latin1;
         ");
-
     }
 
     public function getCollection($part = false)
@@ -146,7 +149,7 @@ abstract class supa_eav extends supa_model
 
     public function eidGetNew()
     {
-        $result = (array) $this->sql("select eid from {{eav_table}} order by eid desc limit 1");
+        $result = (array) $this->sql("select eid from {{eavtable}} order by eid desc limit 1");
         if(isset($result[0]['eid'])) $lasteid = (int) $result[0]['eid']; else $lasteid = 0;
         $lasteid++;
         return $lasteid;
@@ -155,18 +158,18 @@ abstract class supa_eav extends supa_model
 
     protected function addSingleAttribute($eid, $attribute, $value, $meta = 'false')
     {
-        return $this->sql("insert into {{eav_table}} (eid, entity, attribute, value, meta) values('$eid', '{{eav_entity}}', '$attribute', '".addslashes($value)."', '".(string) $meta."');");
+        return $this->sql("insert into {{eavtable}} (eid, entity, attribute, value, meta) values('$eid', '{{eav_entity}}', '$attribute', '".addslashes($value)."', '".(string) $meta."');");
     }
 
     protected function updateSingleAttribute($eid, $attribute, $value)
     {
-        return $this->sql("update {{eav_table}} set value = '".addslashes($value)."' where attribute = '$attribute' and eid = $eid");
+        return $this->sql("update {{eavtable}} set value = '".addslashes($value)."' where attribute = '$attribute' and eid = $eid");
     }
 
     public function sql($sql, $debug = false)
     {
         $list = array(
-            '{{eav_table}}'=>$this->getConfig('mysql/prefix')._.$this->getConfig('mysql/eav_table'),
+            '{{eavtable}}'=>$this->getConfig('mysql/prefix')._.$this->getConfig('mysql/eavtable'),
             '{{eav_entity}}'=>$this->getEntity(),
             '{{eid}}'=>$this->getEid(),
 
@@ -254,7 +257,7 @@ abstract class supa_eav extends supa_model
      */
     public function getStoredEntities()
     {
-        $entities = $this->sql('select entity from {{eav_table}} group by entity desc');
+        $entities = $this->sql('select entity from {{eavtable}} group by entity desc');
 
         $data = array();
         if(!$entities) return false;

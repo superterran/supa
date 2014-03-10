@@ -19,7 +19,6 @@ class supa_mediator extends supa_object {
 
     public function __construct()
     {
-;
        $this->setConfig('path/appdir', realpath(dirname(__FILE__)).DS)
             ->setConfig('path/basedir', $this->getConfig('path/appdir').DS)
             ->setConfig('path/baseurl',  'http://'.$_SERVER['HTTP_HOST'].DS)
@@ -36,23 +35,21 @@ class supa_mediator extends supa_object {
         $this->loadModules();
     }
 
-     /**
-     * Loads root of modules. This doens't actually manage the module
-     * directories, that's done by the 'modules' module. Any other top
-     * level files will also be auto-instantiated and can provide low
-     * level functionality
-     */
+    /**
+    * Loads root of modules. This doens't actually manage the module
+    * directories, that's done by the 'modules' module. Any other top
+    * level files will also be auto-instantiated and can provide low
+    * level functionality
+    */
     protected function loadModules()
     {
-//        foreach(glob($this->getConfig('path/absdir').'*'.PHP) as $file) require_once($file); // load abstract classes
-
         $loadpath = $this->getConfig('path/modulesdir');
-
         $_sorted = array_merge_recursive($this->_order, glob($loadpath.'*'.PHP));
-	foreach($_sorted as $module)
-        {
-            if(require_once($module)) {
 
+	    foreach($_sorted as $module)
+        {
+            if(require_once($module))
+            {
                 $classname = str_replace(PHP, '', self::CLASS_PREFIX._.basename($module)); // supa_modules, for pages
                 $name = str_replace(PHP, '', basename($module)); // modules, for pages
                 if(class_exists($classname) && !is_object($this->getModule($name))) $this->setModule($name, new $classname());
@@ -61,8 +58,8 @@ class supa_mediator extends supa_object {
     }
 
     /**
-     * Loads config.xml into memory
-     */
+    * Loads config.xml into memory
+    */
     public function loadConfigXml()
     {
         if(file_exists($this->getConfig('path/configxml'))) {
@@ -72,7 +69,11 @@ class supa_mediator extends supa_object {
             $this->setConfig(array_merge_recursive($new_config, $current_config));
             return $this;
         } elseif(file_exists($this->getConfig('path/configxml').'.sample')) {
-            $this->log("Installer?"); exit();
+            if($_SERVER['REQUEST_URI'] != '/install/') {
+                header('location: '.$this->getConfig('path/baseurl').'install/'); exit();
+            } else {
+            //    die('installer');
+            }
         } else  {
             $this->log("Couldn't load configuration, config.xml does not exist."); exit();
         }

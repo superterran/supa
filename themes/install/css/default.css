@@ -1,0 +1,113 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100);
+body {
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background-color: lightsteelblue;
+  /*background-color: darkslategray;*/
+
+  color: #000;
+  font-weight: 300;
+  margin: 0;
+  background-image: url('../img/noise.png');
+  font-size: 15px;
+}
+
+
+#supa-debug {
+  /*display: none;*/
+
+  padding: 10px;
+  background-color: white;
+  color: black;
+}
+
+#container {
+    display: block;
+    border: 0 2px 0 2px solid #778899;
+    width: 700px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, .2);
+}
+
+#header {
+    padding: 20px 5px;
+    display: block;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    /*background-color: rgba(255, 255, 255, .2);*/
+}
+
+
+#content h1, #content h2 {
+    text-align: center;
+}
+
+#content h2 {
+    background-color: rgba(255, 255, 255, .2);
+    margin: 10px 0;
+    padding: 10px;
+    display: block;
+}
+
+#footer {
+    background-color: rgba(255, 255, 255, .2);
+    margin: 10px 0;
+    padding: 10px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+div.item {
+    dispaly: block;
+    padding: 2px;
+    clear: both;
+    width: 300px;
+    margin: 0px auto;
+}
+
+div.item label {
+    display: block;
+    width: 100px;
+    float: left;
+}
+
+div.license {
+    white-space: pre-wrap;
+    display: block;
+    padding: 10px 50px;
+    overflow-y: scroll;
+    height: 300px;
+
+}
+
+#complete {
+    padding: 10px;
+    background-color: firebrick;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 50px 0;
+}
+
+#complete:hover {
+    background-color: red;
+}
+
+ul#error {
+    display: block;
+    background-color: rgba(255, 0, 0, .6);
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    margin: 0 0 -10px 0;
+}
+
+ul#error li {
+    list-style: none;
+}

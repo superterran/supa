@@ -1,0 +1,25 @@
+<module>
+
+    <meta>
+        <panels>
+            <name>Installer</name>
+            <description>This adds proper installer support, because all frameworks need an install page!</description>
+            <active>true</active>
+        </panels>
+    </meta>
+
+    <controls>
+        <install>
+            <index>supa_modules_install_controls_index</index>
+        </install>
+    </controls>
+
+    <models>
+        <install>
+            <config>
+                <class>supa_modules_install_models_config</class>
+            </config>
+        </install>
+    </models>
+
+</module>
