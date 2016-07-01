@@ -1,0 +1,22 @@
+---
+- hosts: all
+  vars:
+   - email: superterran@gmail.com
+
+  tasks:
+   - name: install prereqs 
+     yum: pkg=php,php-mysql,mariadb,mariadb-server,MySQL-python state=installed update_cache=true
+
+   - name: assert mysql as started
+     service: 
+       name: mariadb 
+       state: started
+       enabled: true
+
+   - name: assert lyricpimp database is present
+     mysql_db: name=supa state=present
+     register: db_present
+
+   - name: import supa database
+     mysql_db: state=import name=supa target={{ playbook_dir }}/supa.sql
+     when: dp_present is not defined
