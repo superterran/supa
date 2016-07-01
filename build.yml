@@ -13,7 +13,7 @@
        state: started
        enabled: true
 
-   - name: assert lyricpimp database is present
+   - name: assert supa database is present
      mysql_db: name=supa state=present
      register: db_present
 
